@@ -1,0 +1,126 @@
+# Revisão de PR por agente (Claude Code), na versão para repositório público. Comenta no PR; não aprova, não pede
+# mudança formal e não faz commit: o merge continua sendo de uma pessoa. Roda quando o PR é aberto pronto, reaberto ou
+# sai de rascunho, e de novo quando recebe a label `revisar` (não a cada push, para não gastar o limite de uso da
+# assinatura). A label `sem-revisao` pula a revisão quando o PR fica pronto.
+#
+# A diferença para o revisao-pr.yml dos outros repositórios: este repositório é público, e os comentários do PR e os
+# logs do Actions também. Por isso:
+# - não baixa o contexto central (o repositório smartadv, privado) nem usa deploy key: a revisão poderia citá-lo num
+#   comentário ou num log. As regras do site estão no prompt e no CLAUDE.md deste repositório;
+# - PR de fork não roda: ele não recebe o secret, e o agente não revisa código de fora.
+#
+# Secret do repositório: CLAUDE_CODE_OAUTH_TOKEN, gerado por `claude setup-token` (plano Pro ou Max). O app do Claude
+# no GitHub precisa ter acesso a este repositório.
+name: Revisão de PR
+
+on:
+  pull_request:
+    types: [opened, reopened, ready_for_review, labeled]
+
+jobs:
+  revisao:
+    # Revisa quando o PR fica pronto (aberto pronto, reaberto ou saindo de rascunho) ou quando alguém põe a label
+    # "revisar", para revisar de novo depois de mudanças. Push não dispara: cada revisão gasta o limite da assinatura.
+    # Rascunho nunca é revisado, nem o PR que fica pronto com a label "sem-revisao": a pessoa decidiu que ele não
+    # precisa (CONVENCOES.md, no smartadv). A label "revisar" ainda pede uma revisão nele. PR de fork nunca é revisado.
+    if: >-
+      github.event.pull_request.draft == false &&
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      ((github.event.action == 'labeled' && github.event.label.name == 'revisar') ||
+       (github.event.action != 'labeled' && !contains(github.event.pull_request.labels.*.name, 'sem-revisao')))
+    # Uma revisão por PR de cada vez: uma nova cancela a que estiver rodando
+    concurrency:
+      group: revisao-pr-${{ github.event.pull_request.number }}
+      cancel-in-progress: true
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      pull-requests: write
+      issues: write
+      id-token: write
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+
+      - name: Revisão
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          prompt: |
+            REPOSITÓRIO: ${{ github.repository }}
+            PR: ${{ github.event.pull_request.number }}
+
+            Você revisa PRs do site da SmartADV, um site estático em Astro publicado pelo GitHub Pages. Este
+            repositório é PÚBLICO: o seu comentário também é. Cite só o que está neste repositório e no PR.
+
+            Antes de tudo, leia o `CLAUDE.md` e o `README.md` deste repositório. Ignore os imports `@../smartadv/...`
+            do `CLAUDE.md`: eles apontam para um repositório privado que não existe aqui. Depois leia a descrição
+            (`gh pr view`) e o diff (`gh pr diff`), e abra os arquivos que precisar para entender o contexto da mudança.
+
+            O que procurar, em ordem de importância:
+            1. **Exposição no repositório público** (entrar no código já é publicar, mesmo o que o site não mostra):
+               - segredo, token ou chave, em qualquer arquivo;
+               - dado de cliente: telefone, e-mail ou nome de cliente de um escritório, ou trecho do diagnóstico de um
+                 escritório (o deck comercial de onde vieram os textos é confidencial);
+               - número de resultado ou citação de um escritório que o PR não diga estar confirmado e autorizado;
+               - detalhe interno da infraestrutura: ID de conta, ARN, URL ou hash de endpoint interno;
+               - caminho local de máquina, e-mail pessoal ou dado pessoal além do que o site quer mostrar.
+            2. **LGPD e consentimento:**
+               - script, pixel, fonte, imagem ou CDN de terceiros carregado fora do `src/components/Rastreamento.astro`,
+                 ou antes do "Aceitar";
+               - parceiro novo sem a entrada na política de privacidade (`src/pages/politica-de-privacidade.astro`);
+               - dado pessoal em URL ou query string.
+            3. **Correção:** o build (`astro check` e `astro build`), links e âncoras quebrados, um campo de
+               `src/config.ts` usado do jeito errado, imagem sem `alt`, contraste abaixo do AA, ordem de títulos.
+            4. **Regras do site** (`CLAUDE.md`):
+               - o logo só sobre o navy `#021033`, sem redesenhar nem montar versão horizontal;
+               - o alinhamento no celular, no tablet e no desktop;
+               - texto em português, no tom do site, e só o que a SmartADV entrega hoje. A IA do chatbot está
+                 desligada, e os preços são sob consulta.
+            5. **Legibilidade:** componente que repete outro, texto que devia estar em `src/data/site.ts`, indireção
+               sem motivo. Esses pontos entram como **deveria mudar** ou **sugestão**, nunca como **bloqueia o merge**.
+
+            Como responder:
+            - Em português, curto e direto. Comente só o que vale mudar ou confirmar: não elogie, não repita o diff e
+              não comente estilo que não muda nada.
+            - Problema numa linha específica: comentário inline.
+            - Visão geral: um único comentário no PR (`gh pr comment`), com um resumo de uma ou duas frases e os
+              pontos agrupados por gravidade (**bloqueia o merge**, **deveria mudar**, **sugestão**). Sem nada
+              relevante, diga isso numa linha.
+            - Não aprove, não peça mudanças formalmente, não faça commit nem push: só comente.
+            - Nunca reproduza um segredo nem um dado pessoal, nem que esteja no diff. Diga onde ele está e que precisa
+              ser removido (e, se for segredo, trocado).
+            - Termine o comentário de resumo com uma destas linhas, exatamente assim e sozinha: `<!-- revisao-pr: bloqueia -->`
+              se houver algum ponto em **bloqueia o merge**, ou `<!-- revisao-pr: ok -->` se não houver. O passo seguinte
+              do workflow lê essa marca.
+          claude_args: |
+            --allowedTools "mcp__github_inline_comment__create_inline_comment,Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*),Read,Glob,Grep"
+
+      # Fica vermelho quando a revisão aponta algo que bloqueia o merge, pela marca que ela deixa no fim do comentário
+      # de resumo. É um sinal: o merge continua sendo decisão de uma pessoa. Só vale comentário de bot, para ninguém
+      # liberar o check escrevendo a marca à mão.
+      - name: Veredito da revisão
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          PR: ${{ github.event.pull_request.number }}
+        run: |
+          veredito=$(gh api "repos/$REPO/issues/$PR/comments" --paginate \
+            --jq '.[] | select(.user.type == "Bot") | .body' | grep -oE 'revisao-pr: (ok|bloqueia)' | tail -1)
+          case "$veredito" in
+            "revisao-pr: ok") echo "A revisão não apontou nada que bloqueie o merge." ;;
+            "revisao-pr: bloqueia") echo "::error::A revisão apontou algo que bloqueia o merge. Veja o comentário no PR."; exit 1 ;;
+            *) echo "::error::A revisão não deixou o veredito no comentário: ela pode não ter terminado."; exit 1 ;;
+          esac
+
+      # Tira a label, para ela poder ser posta de novo na próxima revisão
+      - name: Tira a label revisar
+        if: always() && github.event.action == 'labeled'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          PR: ${{ github.event.pull_request.number }}
+        run: gh pr edit "$PR" --repo "$REPO" --remove-label revisar
