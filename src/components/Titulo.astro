@@ -1,0 +1,41 @@
+---
+// O cabeçalho de uma seção: o eyebrow com o filete, o título e um texto de apoio. No celular e no tablet fica
+// centralizado, com um filete de cada lado, como o hero e o contato; do desktop para cima, alinhado à esquerda.
+interface Props {
+  eyebrow: string;
+  titulo: string;
+  texto?: string;
+  tema?: 'claro' | 'escuro';
+  id?: string;
+}
+
+const { eyebrow, titulo, texto, tema = 'claro', id } = Astro.props;
+const escuro = tema === 'escuro';
+---
+
+<div class="mx-auto max-w-3xl text-center lg:mx-0 lg:text-left">
+  <p
+    class:list={[
+      'eyebrow flex items-center justify-center gap-4 lg:justify-start',
+      escuro ? 'text-ouro-500' : 'text-ouro-800',
+    ]}
+  >
+    <span class="filete" aria-hidden="true"></span>
+    {eyebrow}
+    <span class="filete lg:hidden" aria-hidden="true"></span>
+  </p>
+  <h2
+    id={id}
+    class:list={[
+      'mt-5 font-serif text-4xl leading-tight font-semibold text-balance sm:text-5xl',
+      escuro ? 'text-white' : 'text-navy-950',
+    ]}
+  >
+    {titulo}
+  </h2>
+  {
+    texto && (
+      <p class:list={['mt-5 text-lg leading-relaxed text-pretty', escuro ? 'text-nevoa' : 'text-tinta-suave']}>{texto}</p>
+    )
+  }
+</div>

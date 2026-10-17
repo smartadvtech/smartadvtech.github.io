@@ -1,0 +1,71 @@
+---
+import '../styles/global.css';
+import { config, temRastreamento } from '../config';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Rastreamento from '../components/Rastreamento.astro';
+import ConsentBanner from '../components/ConsentBanner.astro';
+import WhatsAppButton from '../components/WhatsAppButton.astro';
+
+interface Props {
+  titulo: string;
+  descricao: string;
+}
+
+const { titulo, descricao } = Astro.props;
+const canonical = new URL(Astro.url.pathname, config.url).href;
+const imagem = new URL('/og.png', config.url).href;
+const organizacao = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: config.nome,
+  url: config.url,
+  logo: new URL('/icon-512.png', config.url).href,
+  email: config.contato.email,
+  description: descricao,
+};
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{titulo}</title>
+    <meta name="description" content={descricao} />
+    <link rel="canonical" href={canonical} />
+    {!config.indexar && <meta name="robots" content="noindex, nofollow" />}
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content={config.nome} />
+    <meta property="og:title" content={titulo} />
+    <meta property="og:description" content={descricao} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={imagem} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#021033" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(organizacao)} />
+    {temRastreamento && <Rastreamento />}
+  </head>
+  <body>
+    <a href="#conteudo" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 botao-ouro">
+      Pular para o conteúdo
+    </a>
+    <Header />
+    <main id="conteudo">
+      <slot />
+    </main>
+    <Footer />
+    <WhatsAppButton />
+    {temRastreamento && <ConsentBanner />}
+  </body>
+</html>

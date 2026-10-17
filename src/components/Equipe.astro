@@ -1,0 +1,46 @@
+---
+import { Image } from 'astro:assets';
+import Titulo from './Titulo.astro';
+import { equipe } from '../data/site';
+
+// As fotos entram em src/assets/equipe/<iniciais em minúsculas>.jpg, em 4:5 (cabeça e ombros). Sem foto, aparece o
+// monograma. Ficam em preto e branco, para as quatro fotos, de lugares e luzes diferentes, ficarem uniformes; a cor
+// volta no hover.
+const fotos = import.meta.glob<{ default: ImageMetadata }>('../assets/equipe/*.{jpg,jpeg,png,webp}', { eager: true });
+function fotoDe(iniciais: string) {
+  const caminho = Object.keys(fotos).find((arquivo) => arquivo.split('/').pop()?.startsWith(`${iniciais.toLowerCase()}.`));
+  return caminho ? fotos[caminho].default : undefined;
+}
+---
+
+<section id="equipe" class="border-t border-navy-950/10 bg-white" aria-labelledby="equipe-titulo">
+  <div class="mx-auto max-w-6xl px-4 py-24 sm:px-6">
+    <Titulo id="equipe-titulo" eyebrow="Equipe" titulo={equipe.titulo} texto={equipe.texto} />
+
+    <ul class="mt-14 grid gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        equipe.socios.map(({ nome, iniciais, papel, bio }) => {
+          const foto = fotoDe(iniciais);
+          return (
+            <li class="group text-center sm:text-left">
+              <div class="mx-auto aspect-[4/5] max-w-64 overflow-hidden rounded-sm bg-navy-950 sm:mx-0 sm:max-w-none">
+                {foto ? (
+                  <Image src={foto} alt={nome} width={480} class="size-full object-cover grayscale transition duration-500 group-hover:grayscale-0" />
+                ) : (
+                  <div class="flex size-full items-center justify-center" aria-hidden="true">
+                    <span class="bg-linear-to-br from-ouro-300 to-ouro-600 bg-clip-text font-serif text-7xl font-semibold text-transparent">
+                      {iniciais}
+                    </span>
+                  </div>
+                )}
+              </div>
+              <h3 class="mt-6 font-serif text-2xl font-semibold text-navy-950">{nome}</h3>
+              <p class="eyebrow mt-2 text-[0.68rem] text-ouro-800">{papel}</p>
+              <p class="mt-4 text-sm leading-relaxed text-tinta-suave">{bio}</p>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </div>
+</section>

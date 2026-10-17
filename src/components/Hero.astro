@@ -1,0 +1,44 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/logo/logo-sem-tagline.png';
+import { hero } from '../data/site';
+import { linkDeContato } from '../lib/contato';
+---
+
+<section class="relative overflow-hidden bg-navy-950" aria-labelledby="hero-titulo">
+  {/* O triângulo do "A" do logo, grande e quase apagado, ao fundo. Fica longe do logo: atrás dele, revelaria o
+      retângulo do JPEG */}
+  <svg
+    class="pointer-events-none absolute -bottom-56 -left-48 h-[46rem] w-auto text-ouro-500/[0.04]"
+    viewBox="0 0 100 87"
+    aria-hidden="true"
+  >
+    <path d="M50 0 100 87H0Z" fill="currentColor"></path>
+  </svg>
+
+  <div class="relative mx-auto grid max-w-6xl items-center gap-14 px-4 py-20 sm:px-6 lg:grid-cols-[1.2fr_1fr] lg:py-28">
+    {/* No celular e no tablet, centralizado, como o logo acima dele; do desktop para cima, à esquerda do logo */}
+    <div class="text-center lg:text-left">
+      <p class="eyebrow flex items-center justify-center gap-4 text-ouro-500 lg:justify-start">
+        <span class="filete hidden sm:inline-block" aria-hidden="true"></span>
+        <span class="text-balance">{hero.eyebrow}</span>
+        <span class="filete hidden sm:inline-block lg:hidden" aria-hidden="true"></span>
+      </p>
+      <h1
+        id="hero-titulo"
+        class="mt-6 font-serif text-5xl leading-[1.05] font-semibold text-balance text-white sm:text-6xl"
+      >
+        {hero.titulo}
+      </h1>
+      <p class="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-pretty text-nevoa lg:mx-0">{hero.texto}</p>
+      <div class="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:justify-center sm:gap-4 lg:justify-start">
+        <a href={linkDeContato()} class="botao-ouro w-full max-w-xs sm:w-auto" data-rastrear="contato">Fale com a gente</a>
+        <a href="#solucoes" class="botao-contorno w-full max-w-xs sm:w-auto">Conheça as soluções</a>
+      </div>
+    </div>
+
+    <div class="order-first flex justify-center lg:order-none">
+      <Image src={logo} alt="SmartADV" width={420} densities={[1, 2]} class="w-56 max-w-full sm:w-72 lg:w-[26rem]" loading="eager" />
+    </div>
+  </div>
+</section>
