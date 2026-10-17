@@ -30,9 +30,13 @@ O site institucional e comercial da SmartADV (`smartadvtech.com.br`), em Astro, 
 
 - **Prévia:** `npm run build && npm run preview`, e capturas em 393 px (iPhone), 768 px (tablet) e 1440 px antes do
   PR.
-- **Alinhamento:** no celular e no tablet, os títulos das seções, o hero e os cartões da equipe ficam centralizados, e
-  os botões do hero empilhados com a mesma largura. Do desktop (`lg`) para cima, tudo fica à esquerda. Seção nova usa o
-  `Titulo.astro`, que já faz isso. Listas e cartões de texto ficam à esquerda em qualquer largura.
+- **Alinhamento:**
+  - os títulos das seções e o texto do hero ficam centralizados no celular e no tablet, e à esquerda do desktop
+    (`lg`) para cima. Seção nova usa o `Titulo.astro`, que já faz isso;
+  - no celular (abaixo de `sm`), os botões do hero ficam empilhados, com a mesma largura, e a equipe numa coluna,
+    centralizada;
+  - a partir do tablet (`sm`), os botões ficam lado a lado, e a equipe em duas colunas (quatro no desktop), à esquerda;
+  - listas e cartões de texto ficam à esquerda em qualquer largura.
 - **Conferência:** Lighthouse com acessibilidade e boas práticas em 100. O SEO fica baixo enquanto `indexar` for
   `false`, de propósito.
 - **Texto novo:** em português, no tom do resto do site, e só o que a SmartADV entrega hoje. A IA do chatbot está
