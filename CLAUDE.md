@@ -37,8 +37,8 @@ O site institucional e comercial da SmartADV (`smartadvtech.com.br`), em Astro, 
     centralizada;
   - a partir do tablet (`sm`), os botões ficam lado a lado, e a equipe em duas colunas (quatro no desktop), à esquerda;
   - listas e cartões de texto ficam à esquerda em qualquer largura.
-- **Conferência:** Lighthouse com acessibilidade e boas práticas em 100. O SEO fica baixo enquanto `indexar` for
-  `false`, de propósito.
+- **Conferência:** Lighthouse com acessibilidade, boas práticas e SEO em 100, no site publicado. Na prévia local, o
+  canonical aponta para o domínio.
 - **Texto novo:** em português, no tom do resto do site, e só o que a SmartADV entrega hoje. A IA do chatbot está
   desligada e não aparece.
 
@@ -54,4 +54,9 @@ O site institucional e comercial da SmartADV (`smartadvtech.com.br`), em Astro, 
 - **Entrar no repositório já é publicar,** mesmo o que o site não mostra. Os números de resultado (os do Molina &
   Molina) só entram em `src/data/site.ts` depois de confirmados e com a autorização para citá-lo; sem eles, a seção
   não aparece.
-- **No go-live do domínio,** o `indexar` vira `true` e entra o `public/CNAME`, no mesmo PR.
+- **O domínio fica nas configurações do Pages, não num arquivo:** com a publicação pelo Actions, o GitHub ignora o
+  `public/CNAME`.
+- **O merge feito pelo GitHub (botão ou `gh`) leva o e-mail da conta de quem mergeia,** a menos que ela tenha "Keep my
+  email addresses private". Num repositório público, confira o autor depois do merge (`git log origin/main
+  --format=%ae`). Os commits feitos na máquina usam o e-mail privado do GitHub (`git config user.email` deste
+  repositório).
