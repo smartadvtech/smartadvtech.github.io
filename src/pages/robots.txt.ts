@@ -1,7 +1,7 @@
 import type { APIRoute } from 'astro';
 import { config } from '../config';
 
-// Na prévia (config.indexar false), nenhum buscador entra
+// Com config.indexar, libera os buscadores e aponta o sitemap; sem ele, fecha o site inteiro
 export const GET: APIRoute = () => {
   const corpo = config.indexar
     ? `User-agent: *\nAllow: /\n\nSitemap: ${new URL('/sitemap-index.xml', config.url).href}\n`
