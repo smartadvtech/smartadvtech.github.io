@@ -1,0 +1,116 @@
+---
+/*
+ * Os parceiros de medição e anúncio (Google e Meta), atrás do consentimento (LGPD). Nada de terceiros carrega antes do
+ * "Aceitar": o Google entra no modo básico do Consent Mode, só depois da escolha. Só é incluído quando há um ID em
+ * src/config.ts.
+ *
+ * Expõe ao resto do site:
+ * - window.smartadvConsentimento: estado(), aceitar() e recusar(), usados pelo banner;
+ * - window.smartadvRastrear(metodo): o evento de contato (lead), que só sai com consentimento. Todo elemento com
+ *   data-rastrear manda o evento ao ser clicado.
+ *
+ * Um parceiro novo entra em carregar(), e o desligamento dele em recusar().
+ */
+import { config } from '../config';
+
+const { googleTagId, metaPixelId } = config.rastreamento;
+---
+
+<script is:inline define:vars={{ googleTagId, metaPixelId }}>
+  (function () {
+    var CHAVE = 'smartadv-consentimento';
+    var carregado = false;
+
+    function ler() {
+      try {
+        return localStorage.getItem(CHAVE);
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function gravar(valor) {
+      try {
+        localStorage.setItem(CHAVE, valor);
+      } catch (e) {}
+    }
+
+    function carregar() {
+      if (carregado) return;
+      carregado = true;
+      if (googleTagId) {
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function () {
+          window.dataLayer.push(arguments);
+        };
+        window.gtag('consent', 'default', {
+          ad_storage: 'granted',
+          ad_user_data: 'granted',
+          ad_personalization: 'granted',
+          analytics_storage: 'granted',
+        });
+        window.gtag('js', new Date());
+        window.gtag('config', googleTagId);
+        var gtagJs = document.createElement('script');
+        gtagJs.async = true;
+        gtagJs.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(googleTagId);
+        document.head.appendChild(gtagJs);
+      }
+      if (metaPixelId) {
+        // O snippet oficial do Pixel da Meta
+        !(function (f, b, e, v, n, t, s) {
+          if (f.fbq) return;
+          n = f.fbq = function () {
+            n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+          };
+          if (!f._fbq) f._fbq = n;
+          n.push = n;
+          n.loaded = !0;
+          n.version = '2.0';
+          n.queue = [];
+          t = b.createElement(e);
+          t.async = !0;
+          t.src = v;
+          s = b.getElementsByTagName(e)[0];
+          s.parentNode.insertBefore(t, s);
+        })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+        window.fbq('init', metaPixelId);
+        window.fbq('track', 'PageView');
+      }
+    }
+
+    window.smartadvConsentimento = {
+      estado: ler,
+      aceitar: function () {
+        gravar('aceito');
+        carregar();
+      },
+      recusar: function () {
+        gravar('recusado');
+        // Se a pessoa tinha aceitado nesta mesma página, os parceiros param de medir; na próxima, nem carregam
+        if (window.gtag) {
+          window.gtag('consent', 'update', {
+            ad_storage: 'denied',
+            ad_user_data: 'denied',
+            ad_personalization: 'denied',
+            analytics_storage: 'denied',
+          });
+        }
+        if (window.fbq) window.fbq('consent', 'revoke');
+      },
+    };
+
+    window.smartadvRastrear = function (metodo) {
+      if (ler() !== 'aceito') return;
+      if (window.gtag) window.gtag('event', 'generate_lead', { method: metodo });
+      if (window.fbq) window.fbq('track', 'Contact', { content_name: metodo });
+    };
+
+    document.addEventListener('click', function (evento) {
+      var alvo = evento.target instanceof Element ? evento.target.closest('[data-rastrear]') : null;
+      if (alvo) window.smartadvRastrear(alvo.getAttribute('data-rastrear'));
+    });
+
+    if (ler() === 'aceito') carregar();
+  })();
+</script>

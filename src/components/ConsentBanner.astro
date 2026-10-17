@@ -1,0 +1,49 @@
+---
+// O banner de cookies. Aparece na primeira visita e pelo link "Preferências de cookies" do rodapé. Só é incluído
+// quando há um parceiro de medição ou anúncio configurado (src/config.ts).
+---
+
+<div
+  id="consentimento"
+  hidden
+  role="dialog"
+  aria-labelledby="consentimento-titulo"
+  aria-describedby="consentimento-texto"
+  class="fixed inset-x-3 bottom-3 z-50 mx-auto max-w-3xl rounded-sm border border-white/10 bg-navy-900 p-6 shadow-2xl sm:inset-x-6 sm:bottom-6"
+>
+  <p id="consentimento-titulo" class="font-semibold text-white">Cookies e privacidade</p>
+  <p id="consentimento-texto" class="mt-2 text-sm leading-relaxed text-nevoa">
+    Usamos cookies de medição e de anúncios (Google e Meta) para entender como o site é usado e medir nossas
+    campanhas. Eles só são ativados se você aceitar. Veja a <a
+      href="/politica-de-privacidade"
+      class="text-ouro-300 underline underline-offset-2 hover:text-ouro-500">política de privacidade</a
+    >.
+  </p>
+  <div class="mt-5 flex flex-wrap gap-3">
+    <button type="button" class="botao-ouro cursor-pointer px-5 py-2.5" data-consentimento="aceitar">Aceitar</button>
+    <button type="button" class="botao-contorno cursor-pointer px-5 py-2.5" data-consentimento="recusar">Recusar</button>
+  </div>
+</div>
+
+<script>
+  const banner = document.getElementById('consentimento');
+  const consentimento = window.smartadvConsentimento;
+
+  if (banner && consentimento) {
+    if (!consentimento.estado()) banner.hidden = false;
+
+    banner.querySelectorAll<HTMLButtonElement>('[data-consentimento]').forEach((botao) => {
+      botao.addEventListener('click', () => {
+        if (botao.dataset.consentimento === 'aceitar') consentimento.aceitar();
+        else consentimento.recusar();
+        banner.hidden = true;
+      });
+    });
+
+    document.querySelectorAll('[data-abrir-consentimento]').forEach((link) => {
+      link.addEventListener('click', () => {
+        banner.hidden = false;
+      });
+    });
+  }
+</script>

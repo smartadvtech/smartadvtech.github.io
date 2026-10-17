@@ -1,0 +1,35 @@
+---
+import Titulo from './Titulo.astro';
+import { metodologia } from '../data/site';
+---
+
+<section id="metodologia" class="bg-navy-950" aria-labelledby="metodologia-titulo">
+  <div class="mx-auto max-w-6xl px-4 py-24 sm:px-6">
+    <Titulo id="metodologia-titulo" tema="escuro" eyebrow="Como trabalhamos" titulo="Do kickoff ao go-live" />
+
+    <ol class="mt-14 grid gap-px overflow-hidden rounded-sm bg-white/10 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        metodologia.passos.map(({ titulo, texto }, i) => (
+          <li class="bg-navy-900 p-8">
+            <p class="font-serif text-4xl text-ouro-500" aria-hidden="true">
+              {i + 1}
+            </p>
+            <h3 class="mt-4 font-semibold text-white">{titulo}</h3>
+            <p class="mt-2 leading-relaxed text-nevoa-suave">{texto}</p>
+          </li>
+        ))
+      }
+    </ol>
+
+    <div class="mt-10 flex flex-col gap-4 text-nevoa sm:flex-row sm:gap-12">
+      <p class="flex items-center gap-3">
+        <span class="filete w-6" aria-hidden="true"></span>
+        {metodologia.prazo}
+      </p>
+      <p class="flex items-center gap-3">
+        <span class="filete w-6" aria-hidden="true"></span>
+        {metodologia.suporte}
+      </p>
+    </div>
+  </div>
+</section>

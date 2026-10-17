@@ -1,0 +1,26 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import Gargalos from '../components/Gargalos.astro';
+import Solucoes from '../components/Solucoes.astro';
+import Jornada from '../components/Jornada.astro';
+import Metodologia from '../components/Metodologia.astro';
+import Resultados from '../components/Resultados.astro';
+import Equipe from '../components/Equipe.astro';
+import Contato from '../components/Contato.astro';
+import { resultados } from '../data/site';
+---
+
+<Base
+  titulo="SmartADV · Consultoria e tecnologia para escritórios de advocacia"
+  descricao="Ajudamos escritórios de advocacia a crescer, transformando operações desestruturadas em processos simples, eficientes e automatizados."
+>
+  <Hero />
+  <Gargalos />
+  <Solucoes />
+  <Jornada />
+  <Metodologia />
+  {resultados && <Resultados dados={resultados} />}
+  <Equipe />
+  <Contato />
+</Base>

@@ -1,0 +1,25 @@
+# O build em cada PR (astro check e astro build), para um erro aparecer antes do merge. A publicação é o
+# publicacao.yml, na main.
+name: Build
+
+on:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Build
+        run: npm ci && npm run build
+        env:
+          ASTRO_TELEMETRY_DISABLED: "1"

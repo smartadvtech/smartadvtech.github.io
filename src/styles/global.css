@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+/* Fontes no próprio site, sem CDN: nada vai para terceiros antes do consentimento */
+@import "@fontsource/montserrat/latin-400.css";
+@import "@fontsource/montserrat/latin-500.css";
+@import "@fontsource/montserrat/latin-600.css";
+@import "@fontsource/cormorant-garamond/latin-500.css";
+@import "@fontsource/cormorant-garamond/latin-600.css";
+
+/*
+ * As cores vêm do logo. O navy é o fundo exato do JPEG (#021033), para os recortes do logo se fundirem com a página.
+ * O dourado escuro é o do texto sobre o marfim (contraste 5,0, AA).
+ */
+@theme {
+  --color-navy-950: #021033;
+  --color-navy-900: #0a1a45;
+  --color-navy-800: #13265a;
+  --color-ouro-300: #f7d574;
+  --color-ouro-500: #e0b04a;
+  --color-ouro-600: #ca9535;
+  --color-ouro-800: #8c6420;
+  --color-marfim: #faf8f3;
+  --color-tinta: #1b2333;
+  --color-tinta-suave: #5b6475;
+  --color-nevoa: #c9cedb;
+  --color-nevoa-suave: #a9b1c4;
+
+  --font-serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-sans: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    @apply bg-marfim font-sans text-tinta antialiased;
+    /* A Cormorant usa números antigos por padrão, e o "01" parece "OI" */
+    font-variant-numeric: lining-nums;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-ouro-500;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+/* O texto pequeno em caixa alta e espaçado, como o tagline do logo */
+@utility eyebrow {
+  @apply text-xs font-medium tracking-[0.25em] uppercase;
+}
+
+@utility botao {
+  @apply inline-flex items-center justify-center gap-2 rounded-sm px-6 py-3 text-sm font-semibold tracking-wide
+    transition-colors;
+}
+
+@utility botao-ouro {
+  @apply botao bg-linear-to-br from-ouro-300 to-ouro-600 text-navy-950 hover:from-ouro-500 hover:to-ouro-600;
+}
+
+@utility botao-contorno {
+  @apply botao border border-ouro-500/60 text-ouro-300 hover:border-ouro-300 hover:bg-white/5;
+}
+
+/* A linha fina dourada, como as do tagline */
+@utility filete {
+  @apply inline-block h-px w-12 bg-linear-to-r from-ouro-300 to-ouro-600;
+}

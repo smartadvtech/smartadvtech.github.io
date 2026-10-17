@@ -1,0 +1,62 @@
+---
+import Titulo from './Titulo.astro';
+import { consultoria, tecnologia } from '../data/site';
+import { linkDeContato } from '../lib/contato';
+---
+
+<section id="solucoes" class="bg-navy-950" aria-labelledby="solucoes-titulo">
+  <div class="mx-auto max-w-6xl px-4 py-24 sm:px-6">
+    <Titulo
+      id="solucoes-titulo"
+      tema="escuro"
+      eyebrow="Soluções"
+      titulo="Processos, tecnologia e gestão, no ritmo do escritório"
+      texto="Duas frentes que se completam: a consultoria organiza a operação, e a tecnologia tira dela o trabalho repetitivo."
+    />
+
+    <div class="mt-14 grid gap-6 lg:grid-cols-2">
+      <article class="flex flex-col rounded-sm border border-white/10 bg-navy-900 p-8 sm:p-10">
+        <p class="eyebrow text-ouro-500">Consultoria</p>
+        <h3 class="mt-4 font-serif text-3xl font-semibold text-white">{consultoria.titulo}</h3>
+        <p class="mt-4 leading-relaxed text-nevoa">{consultoria.texto}</p>
+        <ul class="mt-8 space-y-4">
+          {
+            consultoria.itens.map((item) => (
+              <li class="flex gap-3 leading-relaxed text-nevoa">
+                <svg class="mt-1 size-4 shrink-0 text-ouro-500" viewBox="0 0 16 16" aria-hidden="true">
+                  <path d="M3 8.5 6.5 12 13 4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                {item}
+              </li>
+            ))
+          }
+        </ul>
+        <a href="#jornada" class="mt-auto pt-10 text-sm font-semibold text-ouro-300 hover:text-ouro-500">
+          Veja a jornada em 4 fases →
+        </a>
+      </article>
+
+      <article class="flex flex-col rounded-sm border border-white/10 bg-navy-900 p-8 sm:p-10">
+        <p class="eyebrow text-ouro-500">Tecnologia</p>
+        <h3 class="mt-4 font-serif text-3xl font-semibold text-white">{tecnologia.titulo}</h3>
+        <p class="mt-4 leading-relaxed text-nevoa">{tecnologia.texto}</p>
+        <div class="mt-8 space-y-6">
+          {
+            tecnologia.produtos.map(({ nome, texto }) => (
+              <div class="border-l border-ouro-500/50 pl-5">
+                <h4 class="font-semibold text-white">{nome}</h4>
+                <p class="mt-2 leading-relaxed text-nevoa-suave">{texto}</p>
+              </div>
+            ))
+          }
+        </div>
+        <p class="mt-auto pt-10 text-sm text-nevoa-suave">
+          {tecnologia.nota}{' '}
+          <a href={linkDeContato()} class="font-semibold text-ouro-300 hover:text-ouro-500" data-rastrear="contato">
+            Fale com a gente →
+          </a>
+        </p>
+      </article>
+    </div>
+  </div>
+</section>

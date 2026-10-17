@@ -1,0 +1,106 @@
+---
+// Rascunho para a revisão jurídica antes do go-live do domínio
+import Base from '../layouts/Base.astro';
+import { config, temRastreamento } from '../config';
+
+const { razaoSocial, cnpj } = config.empresa;
+const controladora = [razaoSocial || config.nome, cnpj && `CNPJ ${cnpj}`].filter(Boolean).join(', ');
+const { googleTagId, metaPixelId } = config.rastreamento;
+const atualizacao = '17 de outubro de 2026';
+---
+
+<Base
+  titulo="Política de privacidade · SmartADV"
+  descricao="Como a SmartADV trata os dados pessoais de quem visita o site e de quem entra em contato."
+>
+  <article
+    class="mx-auto max-w-3xl px-4 py-20 sm:px-6 [&_h2]:mt-12 [&_h2]:font-serif [&_h2]:text-3xl [&_h2]:font-semibold [&_h2]:text-navy-950 [&_li]:mt-2 [&_p]:mt-4 [&_p]:leading-relaxed [&_ul]:mt-4 [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:leading-relaxed"
+  >
+    <p class="eyebrow flex items-center gap-4 text-ouro-800">
+      <span class="filete" aria-hidden="true"></span>
+      Privacidade
+    </p>
+    <h1 class="mt-5 font-serif text-5xl font-semibold text-navy-950">Política de privacidade</h1>
+    <p class="text-sm text-tinta-suave">Atualizada em {atualizacao}.</p>
+
+    <h2>Quem somos</h2>
+    <p>
+      Este site é da {controladora}, a controladora dos dados pessoais tratados nele, nos termos da Lei Geral de
+      Proteção de Dados Pessoais (Lei nº 13.709/2018, a LGPD). Para qualquer assunto sobre os seus dados, escreva para
+      <a href={`mailto:${config.contato.email}`} class="text-ouro-800 underline underline-offset-2">{config.contato.email}</a>.
+    </p>
+
+    <h2>Que dados tratamos e para quê</h2>
+    <ul>
+      <li>
+        <strong>Dados técnicos de acesso.</strong> O serviço que hospeda o site (GitHub Pages) registra o endereço IP, o
+        navegador e a página acessada, para a segurança e o funcionamento do site.
+      </li>
+      <li>
+        <strong>Contato.</strong> Quando você nos escreve por e-mail ou pelo WhatsApp, tratamos o seu nome, o seu
+        contato e o que você contar sobre o seu escritório, para responder e apresentar as nossas soluções.
+      </li>
+      <li>
+        <strong>Cookies de medição e de anúncios.</strong>
+        {
+          temRastreamento ? (
+            <>
+              Só com o seu consentimento, dado no banner de cookies, usamos cookies para entender como o site é usado e
+              medir as nossas campanhas:
+              {googleTagId && ' Google (Google Analytics e Google Ads)'}
+              {googleTagId && metaPixelId && ' e'}
+              {metaPixelId && ' Meta (Pixel da Meta, do Facebook e do Instagram)'}. Sem o consentimento, eles não são
+              ativados.
+            </>
+          ) : (
+            'Hoje o site não usa cookies de medição nem de anúncios. Se passar a usar, eles só serão ativados com o seu consentimento, pedido num banner.'
+          )
+        }
+      </li>
+    </ul>
+
+    <h2>Bases legais</h2>
+    <ul>
+      <li>Cookies de medição e de anúncios: o seu consentimento (art. 7º, I, da LGPD), que pode ser revogado a qualquer momento.</li>
+      <li>Dados técnicos de acesso: o legítimo interesse na segurança e no funcionamento do site (art. 7º, IX).</li>
+      <li>
+        Contato: os procedimentos preliminares a um contrato, a seu pedido (art. 7º, V), e o legítimo interesse em
+        responder a quem nos procura (art. 7º, IX).
+      </li>
+    </ul>
+
+    <h2>Com quem compartilhamos</h2>
+    <p>
+      Com os fornecedores que tornam o site e o contato possíveis: o GitHub (hospedagem do site), a Microsoft (e-mail) e
+      a Meta (WhatsApp){temRastreamento && ', além dos parceiros de medição e de anúncios listados acima, se você aceitar os cookies'}.
+      Alguns deles tratam os dados fora do Brasil, com as garantias previstas no art. 33 da LGPD. Não vendemos dados
+      pessoais.
+    </p>
+
+    <h2>Por quanto tempo</h2>
+    <p>
+      Os dados de contato ficam pelo tempo necessário para responder e acompanhar a conversa comercial e depois são
+      eliminados, a não ser que a lei exija guardá-los. Os cookies duram o prazo definido por cada parceiro, e você pode
+      apagá-los no navegador a qualquer momento.
+    </p>
+
+    <h2>Os seus direitos</h2>
+    <p>
+      Você pode pedir a confirmação de que tratamos os seus dados, o acesso a eles, a correção, a anonimização, o
+      bloqueio ou a eliminação, a portabilidade, a informação sobre com quem os compartilhamos e a revogação do
+      consentimento (art. 18 da LGPD), pelo e-mail
+      <a href={`mailto:${config.contato.email}`} class="text-ouro-800 underline underline-offset-2">{config.contato.email}</a>.
+      Você também pode reclamar à Autoridade Nacional de Proteção de Dados (ANPD).
+    </p>
+    {
+      temRastreamento && (
+        <p>
+          Para mudar a sua escolha sobre os cookies, use o link "Preferências de cookies", no rodapé.
+        </p>
+      )
+    }
+
+    <h2>Mudanças nesta política</h2>
+    <p>Quando esta política mudar, a data no topo é atualizada.</p>
+  </article>
+</Base>

@@ -1,0 +1,44 @@
+# Publica o site no GitHub Pages a cada push na main. No repositório, Settings → Pages → Source "GitHub Actions".
+# O build é o `npm run build` (astro check e astro build), dentro da withastro/action.
+name: Publicação
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Uma publicação de cada vez, e a que estiver no meio termina
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Build e pacote do Pages
+        uses: withastro/action@v6
+        with:
+          node-version: "22"
+        env:
+          ASTRO_TELEMETRY_DISABLED: "1"
+
+  publicacao:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.publicacao.outputs.page_url }}
+    steps:
+      - name: Publicação
+        id: publicacao
+        uses: actions/deploy-pages@v5
