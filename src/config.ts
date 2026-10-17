@@ -6,11 +6,11 @@ export const config = {
   nome: 'SmartADV',
   url: 'https://smartadvtech.com.br',
 
-  // Enquanto o site está só na prévia (smartadvtech.github.io), os buscadores não indexam. Vira true no go-live do
-  // domínio.
-  indexar: false,
+  // Os buscadores indexam o site: o robots.txt libera e aponta o sitemap, e as páginas ficam sem o noindex. false tira
+  // o site dos buscadores.
+  indexar: true,
 
-  // Aparecem no rodapé e na política de privacidade. Pendente antes do go-live.
+  // Aparecem no rodapé e na política de privacidade quando preenchidos. Vazios, os dois mostram só o nome (SmartADV).
   empresa: {
     razaoSocial: '',
     cnpj: '',
