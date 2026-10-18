@@ -6,7 +6,7 @@ import { config, temRastreamento } from '../config';
 const { razaoSocial, cnpj } = config.empresa;
 const controladora = [razaoSocial || config.nome, cnpj && `CNPJ ${cnpj}`].filter(Boolean).join(', ');
 const { googleTagId, metaPixelId } = config.rastreamento;
-const atualizacao = '17 de outubro de 2026';
+const atualizacao = '18 de outubro de 2026';
 ---
 
 <Base

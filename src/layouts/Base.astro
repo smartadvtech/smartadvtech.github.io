@@ -15,10 +15,13 @@ interface Props {
 const { titulo, descricao } = Astro.props;
 const canonical = new URL(Astro.url.pathname, config.url).href;
 const imagem = new URL('/og.png', config.url).href;
+const { razaoSocial, cnpj } = config.empresa;
 const organizacao = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   name: config.nome,
+  ...(razaoSocial && { legalName: razaoSocial }),
+  ...(cnpj && { taxID: cnpj }),
   url: config.url,
   logo: new URL('/icon-512.png', config.url).href,
   email: config.contato.email,

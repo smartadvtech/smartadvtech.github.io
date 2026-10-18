@@ -23,8 +23,9 @@ const ano = new Date().getFullYear();
           )
         }
       </nav>
-      <p class="text-xs">
-        © {ano} {razaoSocial || config.nome}{cnpj && ` · CNPJ ${cnpj}`}
+      <p class="text-center text-xs md:text-right">
+        © {ano} {razaoSocial || config.nome}
+        {cnpj && <span class="block">CNPJ {cnpj}</span>}
       </p>
     </div>
   </div>
