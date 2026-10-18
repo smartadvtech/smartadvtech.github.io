@@ -10,10 +10,11 @@ export const config = {
   // o site dos buscadores.
   indexar: true,
 
-  // Aparecem no rodapé e na política de privacidade quando preenchidos. Vazios, os dois mostram só o nome (SmartADV).
+  // Aparecem no rodapé, na política de privacidade e nos dados estruturados quando preenchidos. Vazios, os três mostram
+  // só o nome (SmartADV).
   empresa: {
-    razaoSocial: '',
-    cnpj: '',
+    razaoSocial: 'Smart Serviços de Consultoria em Gestão Empresarial Ltda.',
+    cnpj: '67.548.153/0001-49',
   },
 
   contato: {
