@@ -45,7 +45,8 @@ export const consultoria = {
     'se dedicar ao jurídico.',
   itens: [
     'Diagnóstico da operação e um plano de evolução em fases',
-    'Implantação do Projuris e do Digisac, com os fluxos de atendimento, prazos, audiências e perícias',
+    'Implantação do sistema de gestão jurídica e da plataforma de atendimento no WhatsApp, com os fluxos de prazos, ' +
+      'audiências e perícias',
     'Organograma, documentação dos processos e treinamento da equipe',
     'Estruturação comercial: canais de captação e funil de vendas',
   ],
@@ -60,12 +61,14 @@ export const tecnologia = {
       nome: 'Consulta processual no WhatsApp',
       texto:
         'O cliente consulta andamento, audiência e perícia a qualquer hora, no WhatsApp do próprio escritório. ' +
-        'Integrado ao Projuris e ao Digisac: quando não encontra a informação, passa a conversa para a equipe.',
+        'Integrado ao sistema de gestão jurídica e à plataforma de atendimento: quando não encontra a informação, ' +
+        'passa a conversa para a equipe.',
     },
     {
       nome: 'Automação de fluxos de trabalho',
       texto:
-        'Fluxos orquestrados a partir das tarefas do Projuris, com o Holmes, e rastreáveis de ponta a ponta.',
+        'Fluxos orquestrados a partir das tarefas do sistema de gestão jurídica, numa plataforma de processos ' +
+        '(BPM), e rastreáveis de ponta a ponta.',
     },
   ],
   nota: 'Planos mensais por volume de consultas, sob consulta.',
@@ -77,8 +80,8 @@ export const jornada = [
     titulo: 'Fundação operacional',
     texto: 'Organizar a casa: centralizar o atendimento e acabar com o controle manual de prazos.',
     entregas: [
-      'Projuris configurado para atendimentos, prazos, audiências e perícias',
-      'WhatsApp oficial no Digisac, com triagem automática',
+      'Sistema de gestão jurídica configurado para atendimentos, prazos, audiências e perícias',
+      'WhatsApp oficial centralizado numa plataforma de atendimento, com triagem automática',
       'Organograma básico e documentação dos processos',
     ],
   },
@@ -89,7 +92,7 @@ export const jornada = [
     entregas: [
       'Consultas processuais automáticas pelo WhatsApp',
       'Respostas rápidas padronizadas no atendimento',
-      'Gestão do conhecimento no SharePoint e a jornada do cliente novo',
+      'Base de conhecimento da equipe e a jornada do cliente novo',
     ],
   },
   {
@@ -97,7 +100,7 @@ export const jornada = [
     titulo: 'Máquina de vendas e escala',
     texto: 'Previsibilidade na captação de clientes e tecnologia para produzir mais sem inchar a equipe.',
     entregas: [
-      'Canais de captação geridos num funil de vendas integrado ao Digisac',
+      'Canais de captação geridos num funil de vendas integrado ao atendimento',
       'Automação de peças e documentos recorrentes',
     ],
   },
@@ -106,7 +109,7 @@ export const jornada = [
     titulo: 'Governança avançada e melhoria contínua',
     texto: 'Maturidade operacional: processos complexos orquestrados, monitorados e sem gargalos escondidos.',
     entregas: [
-      'Mapeamento e orquestração de processos (BPM, com o Holmes)',
+      'Mapeamento e orquestração de processos (BPM)',
       'Automações finas e integrações entre os fluxos',
     ],
   },
