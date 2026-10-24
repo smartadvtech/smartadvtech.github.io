@@ -16,7 +16,7 @@ export const hero = {
     'Deixamos a área de atendimento do seu escritório pronta: o WhatsApp do escritório numa plataforma para a ' +
     'equipe, triagem automática, equipe treinada e um assistente que informa andamento, audiência e perícia ao ' +
     'cliente a qualquer hora, direto do sistema de gestão do escritório.',
-  detalhe: 'A partir de R$ 290/mês · pronto em até 30 dias',
+  detalhe: 'A partir de R$ 69,90/mês · pronto em até 30 dias',
 };
 
 // A conversa do celular do hero: ilustração, com dados fictícios
@@ -195,10 +195,13 @@ export const transparencia = [
   },
 ];
 
+// As faixas do aditivo ao contrato. O preço é em reais por mês.
 export const planos = {
   itens: [
-    { nome: 'Basic', preco: 290, cota: '2.000', publico: 'Para a maioria dos escritórios' },
-    { nome: 'Pro', preco: 420, cota: '5.000', publico: 'Para escritórios com muitos clientes' },
+    { nome: 'Starter', preco: 69.9, cota: '200', publico: 'Para escritórios que estão começando' },
+    { nome: 'Plus', preco: 129.9, cota: '500', publico: 'Para escritórios em crescimento' },
+    { nome: 'Basic', preco: 199.9, cota: '1.000', publico: 'Para escritórios com muitos clientes' },
+    { nome: 'Pro', preco: 290, cota: '3.000', publico: 'Para escritórios de alto volume' },
   ],
   inclui: [
     'Consulta de andamento, audiência e perícia',
@@ -206,7 +209,9 @@ export const planos = {
     'Aviso de uso da cota por e-mail',
     'Sem cobrança por consulta',
   ],
-  consulta: 'Consulta é cada pedido de andamento, audiência ou perícia que um cliente faz ao assistente.',
+  consulta:
+    'Consulta é cada pedido de andamento, audiência ou perícia que um cliente faz ao assistente. No diagnóstico, ' +
+    'estimamos o plano pelo volume de clientes do escritório.',
   nota:
     'A implantação é orçada no diagnóstico gratuito, conforme o tamanho do escritório. A plataforma de atendimento e o ' +
     'sistema de gestão são contratados em nome do escritório, direto com cada fornecedor.',
@@ -263,9 +268,9 @@ export const perguntas = [
   {
     pergunta: 'Quanto custa?',
     resposta:
-      'A mensalidade do atendimento automático é de R$ 290 (até 2.000 consultas por mês) ou R$ 420 (até 5.000). A ' +
-      'implantação é orçada no diagnóstico, conforme o tamanho do escritório. A plataforma de atendimento e o sistema ' +
-      'de gestão são pagos direto aos fornecedores.',
+      'A mensalidade do atendimento automático vai de R$ 69,90 (até 200 consultas por mês) a R$ 290 (até 3.000), em ' +
+      'quatro planos. A implantação é orçada no diagnóstico, conforme o tamanho do escritório. A plataforma de ' +
+      'atendimento e o sistema de gestão são pagos direto aos fornecedores.',
   },
 ];
 

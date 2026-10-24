@@ -72,7 +72,7 @@ export const tecnologia = {
         '(BPM), e rastreáveis de ponta a ponta.',
     },
   ],
-  nota: 'Planos mensais por volume de consultas, a partir de R$ 290.',
+  nota: 'Planos mensais por volume de consultas, a partir de R$ 69,90.',
 };
 
 export const jornada = [
