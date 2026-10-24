@@ -1,0 +1,30 @@
+---
+import Titulo from '../Titulo.astro';
+import { comoFunciona } from '../../data/atendimento';
+---
+
+<section id="como-funciona" class="bg-navy-950" aria-labelledby="como-funciona-titulo">
+  <div class="mx-auto max-w-6xl px-4 py-24 sm:px-6">
+    <Titulo
+      id="como-funciona-titulo"
+      tema="escuro"
+      eyebrow="Para o seu cliente"
+      titulo="Como funciona"
+      texto="Simples para o cliente, que já usa o WhatsApp, e sem trabalho para a equipe."
+    />
+
+    <ol class="mt-14 grid gap-px overflow-hidden rounded-sm bg-white/10 md:grid-cols-3">
+      {
+        comoFunciona.map(({ titulo, texto }, i) => (
+          <li class="bg-navy-900 p-8">
+            <p class="font-serif text-4xl text-ouro-500" aria-hidden="true">
+              {i + 1}
+            </p>
+            <h3 class="mt-4 font-semibold text-white">{titulo}</h3>
+            <p class="mt-2 leading-relaxed text-nevoa-suave">{texto}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>

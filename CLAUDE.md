@@ -19,11 +19,13 @@ O site institucional e comercial da SmartADV (`smartadvtech.com.br`), em Astro, 
 
 | Pasta | O que tem |
 |---|---|
-| `src/data/site.ts` | os textos das seções |
+| `src/data/site.ts` | os textos das seções da home |
+| `src/data/atendimento.ts` | os textos da página do atendimento no WhatsApp (`/atendimento`), a página da campanha |
 | `src/config.ts` | e-mail, WhatsApp, IDs dos parceiros de anúncio, dados da empresa e `indexar` |
-| `src/components/` | uma seção por componente; `Rastreamento` (consentimento e parceiros), `ConsentBanner` e `WhatsAppButton` |
-| `src/pages/` | a página inicial, a política de privacidade, a 404 e o `robots.txt` |
+| `src/components/` | uma seção por componente; `Rastreamento` (consentimento e parceiros), `ConsentBanner` e `WhatsAppButton`. As seções só da página do atendimento ficam em `src/components/atendimento/` |
+| `src/pages/` | a página inicial, a do atendimento, a política de privacidade, a 404 e o `robots.txt` |
 | `src/assets/` | os recortes do logo e as fotos da equipe |
+| `public/videos/` | o vídeo da página do atendimento e o pôster dele; o preview do link da página é o `public/og-atendimento.png` |
 | `scripts/recortar-logo.py` | gera os recortes, o favicon e o `og.png` a partir de `design/logo-original.jpeg` |
 
 ## Como trabalhar
@@ -41,6 +43,13 @@ O site institucional e comercial da SmartADV (`smartadvtech.com.br`), em Astro, 
   canonical aponta para o domínio.
 - **Texto novo:** em português, no tom do resto do site, e só o que a SmartADV entrega hoje. A IA do chatbot está
   desligada e não aparece.
+- **Página de campanha** (como a `/atendimento`): `cabecalhoSimples` no `Base` (só o logo e o botão, sem o menu que leva
+  para fora dela), a imagem de preview própria (`imagem`) e o `contato` com a mensagem e o assunto da página, para o
+  lead chegar dizendo de onde veio. Os botões levam um `data-rastrear` próprio, que vira o método do evento de lead.
+- **Animação:** sem fade de opacidade em texto. O Lighthouse mede o contraste no meio da animação e reprova; esconda com
+  `visibility` até a vez do elemento e respeite o `prefers-reduced-motion`.
+- **Vídeo:** hospedado no `public/`, num `<video>` com `preload="none"`, nunca um player de terceiros (YouTube,
+  Instagram), que carregaria antes do consentimento.
 
 ## Armadilhas deste repositório
 

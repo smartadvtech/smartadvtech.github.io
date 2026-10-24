@@ -21,7 +21,10 @@ Node 22 ou mais novo.
 
 | O quê | Onde |
 |---|---|
-| Textos das seções | `src/data/site.ts` |
+| Textos das seções da home | `src/data/site.ts` |
+| Textos da página do atendimento no WhatsApp (`/atendimento`) | `src/data/atendimento.ts`. A seção de prova aparece quando `prova` tiver os números; a do vídeo, enquanto `video` não for `null` |
+| Vídeo da página do atendimento | `public/videos/atendimento.mp4` e o pôster `atendimento-poster.jpg` (720x1280, sem áudio) |
+| Imagem de compartilhamento da página do atendimento | `public/og-atendimento.png` (1200x630) |
 | E-mail, WhatsApp, IDs do Google e da Meta, razão social e CNPJ | `src/config.ts` |
 | Fotos da equipe | `src/assets/equipe/<iniciais em minúsculas>.jpg` (`hc.jpg`, `jl.jpg`, `mm.jpg`, `pb.jpg`). Sem foto, aparece o monograma |
 | Cores e fontes | `src/styles/global.css` |

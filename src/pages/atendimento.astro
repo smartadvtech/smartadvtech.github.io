@@ -1,0 +1,66 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/atendimento/Hero.astro';
+import Dores from '../components/atendimento/Dores.astro';
+import AntesDepois from '../components/atendimento/AntesDepois.astro';
+import ComoFunciona from '../components/atendimento/ComoFunciona.astro';
+import Demonstracao from '../components/atendimento/Demonstracao.astro';
+import Entregas from '../components/atendimento/Entregas.astro';
+import Metodologia from '../components/Metodologia.astro';
+import Resultados from '../components/Resultados.astro';
+import Transparencia from '../components/atendimento/Transparencia.astro';
+import Planos from '../components/atendimento/Planos.astro';
+import Perguntas from '../components/atendimento/Perguntas.astro';
+import Contato from '../components/Contato.astro';
+import { config } from '../config';
+import { chamadaFinal, contato, planos, prova, video } from '../data/atendimento';
+
+const descricao =
+  'Tire o atendimento do seu WhatsApp pessoal: triagem automática, equipe treinada e consulta de processo a qualquer ' +
+  'hora. Pronto em até 30 dias.';
+
+const servico = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Atendimento no WhatsApp para escritórios de advocacia',
+  serviceType: 'Atendimento ao cliente no WhatsApp',
+  description: descricao,
+  url: new URL('/atendimento', config.url).href,
+  areaServed: { '@type': 'Country', name: 'Brasil' },
+  audience: { '@type': 'BusinessAudience', audienceType: 'Escritórios de advocacia' },
+  provider: { '@type': 'Organization', name: config.nome, url: config.url },
+  offers: planos.itens.map(({ nome, preco }) => ({
+    '@type': 'Offer',
+    name: nome,
+    priceSpecification: {
+      '@type': 'UnitPriceSpecification',
+      price: preco.toFixed(2),
+      priceCurrency: 'BRL',
+      unitText: 'mês',
+    },
+  })),
+};
+---
+
+<Base
+  titulo="Atendimento no WhatsApp para escritórios de advocacia · SmartADV"
+  descricao={descricao}
+  imagem="/og-atendimento.png"
+  cabecalhoSimples
+  contato={contato}
+>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(servico)} />
+
+  <Hero />
+  <Dores />
+  <AntesDepois />
+  <ComoFunciona />
+  {video && <Demonstracao video={video} />}
+  <Entregas />
+  <Metodologia />
+  {prova && <Resultados dados={prova} />}
+  <Transparencia />
+  <Planos />
+  <Perguntas />
+  <Contato titulo={chamadaFinal.titulo} texto={chamadaFinal.texto} contato={contato} rastrear="atendimento" />
+</Base>

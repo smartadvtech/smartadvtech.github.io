@@ -1,0 +1,42 @@
+---
+import Celular from './Celular.astro';
+import { contato, hero } from '../../data/atendimento';
+import { linkDeContato } from '../../lib/contato';
+---
+
+<section class="relative overflow-hidden bg-navy-950" aria-labelledby="hero-titulo">
+  {/* O triângulo do "A" do logo, como no hero da home */}
+  <svg
+    class="pointer-events-none absolute -bottom-56 -left-48 h-[46rem] w-auto text-ouro-500/[0.04]"
+    viewBox="0 0 100 87"
+    aria-hidden="true"
+  >
+    <path d="M50 0 100 87H0Z" fill="currentColor"></path>
+  </svg>
+
+  <div class="relative mx-auto grid max-w-6xl items-center gap-14 px-4 py-16 sm:px-6 lg:grid-cols-[1.2fr_1fr] lg:py-24">
+    <div class="text-center lg:text-left">
+      <p class="eyebrow flex items-center justify-center gap-4 text-ouro-500 lg:justify-start">
+        <span class="filete hidden sm:inline-block" aria-hidden="true"></span>
+        <span class="text-balance">{hero.eyebrow}</span>
+        <span class="filete hidden sm:inline-block lg:hidden" aria-hidden="true"></span>
+      </p>
+      <h1
+        id="hero-titulo"
+        class="mt-6 font-serif text-5xl leading-[1.05] font-semibold text-balance text-white sm:text-6xl"
+      >
+        {hero.titulo}
+      </h1>
+      <p class="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-pretty text-nevoa lg:mx-0">{hero.texto}</p>
+      <div class="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:justify-center sm:gap-4 lg:justify-start">
+        <a href={linkDeContato(contato)} class="botao-ouro w-full max-w-xs sm:w-auto" data-rastrear="atendimento">
+          Quero um diagnóstico gratuito
+        </a>
+        <a href="#como-funciona" class="botao-contorno w-full max-w-xs sm:w-auto">Veja como funciona</a>
+      </div>
+      <p class="mt-6 text-sm text-nevoa-suave">{hero.detalhe}</p>
+    </div>
+
+    <Celular />
+  </div>
+</section>

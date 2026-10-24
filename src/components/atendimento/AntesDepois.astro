@@ -1,0 +1,36 @@
+---
+import Titulo from '../Titulo.astro';
+import { antesDepois } from '../../data/atendimento';
+---
+
+<section class="border-t border-navy-950/10 bg-white" aria-labelledby="antes-depois-titulo">
+  <div class="mx-auto max-w-6xl px-4 py-24 sm:px-6">
+    <Titulo id="antes-depois-titulo" eyebrow="O que muda" titulo="Do WhatsApp pessoal ao atendimento do escritório" />
+
+    <table class="mt-14 w-full table-fixed border-collapse text-left">
+      <thead>
+        <tr class="border-b border-navy-950/15">
+          <th scope="col" class="eyebrow pr-4 pb-4 text-tinta-suave">Hoje</th>
+          <th scope="col" class="eyebrow pb-4 pl-4 text-ouro-800">Com a SmartADV</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          antesDepois.map(({ antes, depois }) => (
+            <tr class="border-b border-navy-950/10">
+              <td class="py-5 pr-4 align-top text-sm leading-relaxed text-tinta-suave sm:text-base">{antes}</td>
+              <td class="py-5 pl-4 align-top text-sm leading-relaxed font-medium text-navy-950 sm:text-base">
+                <span class="flex gap-3">
+                  <svg class="mt-1 size-4 shrink-0 text-ouro-600" viewBox="0 0 16 16" aria-hidden="true">
+                    <path d="M3 8.5 6.5 12 13 4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                  {depois}
+                </span>
+              </td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+</section>

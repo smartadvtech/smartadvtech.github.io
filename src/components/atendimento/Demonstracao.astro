@@ -1,0 +1,37 @@
+---
+// O vídeo de uma consulta real, hospedado no próprio site: um player de terceiros (YouTube, Instagram) carregaria antes
+// do consentimento. Só baixa quando a pessoa aperta o play (preload="none").
+import Titulo from '../Titulo.astro';
+import { contato, demonstracao } from '../../data/atendimento';
+import { linkDeContato } from '../../lib/contato';
+
+interface Props {
+  video: { src: string; poster: string; largura: number; altura: number };
+}
+
+const { video } = Astro.props;
+---
+
+<section class="mx-auto max-w-6xl px-4 py-24 sm:px-6" aria-labelledby="demonstracao-titulo">
+  <div class="grid items-center gap-14 lg:grid-cols-[1.2fr_1fr]">
+    <div class="flex flex-col items-center lg:items-start">
+      <Titulo id="demonstracao-titulo" eyebrow="Veja funcionando" titulo={demonstracao.titulo} texto={demonstracao.texto} />
+      <a href={linkDeContato(contato)} class="botao-ouro mt-10" data-rastrear="atendimento">Quero isso no meu escritório</a>
+    </div>
+
+    <div class="mx-auto w-full max-w-xs overflow-hidden rounded-[2rem] border-8 border-navy-950 bg-navy-950 shadow-2xl shadow-navy-950/30">
+      <video
+        class="block h-auto w-full"
+        src={video.src}
+        poster={video.poster}
+        width={video.largura}
+        height={video.altura}
+        controls
+        playsinline
+        preload="none"
+        aria-label="Vídeo sem som: uma consulta real de andamento de processo pelo WhatsApp do escritório, num sábado"
+      >
+      </video>
+    </div>
+  </div>
+</section>

@@ -63,6 +63,7 @@ export const tecnologia = {
         'O cliente consulta andamento, audiência e perícia a qualquer hora, no WhatsApp do próprio escritório. ' +
         'Integrado ao sistema de gestão jurídica e à plataforma de atendimento: quando não encontra a informação, ' +
         'passa a conversa para a equipe.',
+      link: { href: '/atendimento', texto: 'Conheça o atendimento no WhatsApp →' },
     },
     {
       nome: 'Automação de fluxos de trabalho',
@@ -71,7 +72,7 @@ export const tecnologia = {
         '(BPM), e rastreáveis de ponta a ponta.',
     },
   ],
-  nota: 'Planos mensais por volume de consultas, sob consulta.',
+  nota: 'Planos mensais por volume de consultas, a partir de R$ 290.',
 };
 
 export const jornada = [

@@ -1,20 +1,31 @@
 ---
 import '../styles/global.css';
+// As duas fontes do topo de toda página: o título (Cormorant) e o texto (Montserrat). Pré-carregadas, chegam antes da
+// primeira pintura, e o título e o texto não mudam de altura quando elas trocam a fonte provisória (o CLS).
+import fonteDoTitulo from '@fontsource/cormorant-garamond/files/cormorant-garamond-latin-600-normal.woff2?url';
+import fonteDoTexto from '@fontsource/montserrat/files/montserrat-latin-400-normal.woff2?url';
 import { config, temRastreamento } from '../config';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Rastreamento from '../components/Rastreamento.astro';
 import ConsentBanner from '../components/ConsentBanner.astro';
 import WhatsAppButton from '../components/WhatsAppButton.astro';
+import type { Contato } from '../lib/contato';
 
 interface Props {
   titulo: string;
   descricao: string;
+  /** A imagem do preview do link, em public/ (1200x630). Sem ela, a do site. */
+  imagem?: string;
+  /** A página de uma campanha: o cabeçalho só com o logo e o botão de contato, sem o menu que leva para fora dela. */
+  cabecalhoSimples?: boolean;
+  /** A mensagem e o assunto do primeiro contato nesta página (cabeçalho e botão do WhatsApp) */
+  contato?: Contato;
 }
 
-const { titulo, descricao } = Astro.props;
+const { titulo, descricao, imagem: imagemDaPagina = '/og.png', cabecalhoSimples = false, contato } = Astro.props;
 const canonical = new URL(Astro.url.pathname, config.url).href;
-const imagem = new URL('/og.png', config.url).href;
+const imagem = new URL(imagemDaPagina, config.url).href;
 const { razaoSocial, cnpj } = config.empresa;
 const organizacao = {
   '@context': 'https://schema.org',
@@ -55,20 +66,23 @@ const organizacao = {
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="theme-color" content="#021033" />
     <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="preload" href={fonteDoTitulo} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={fonteDoTexto} as="font" type="font/woff2" crossorigin />
 
     <script type="application/ld+json" set:html={JSON.stringify(organizacao)} />
+    <slot name="head" />
     {temRastreamento && <Rastreamento />}
   </head>
   <body>
     <a href="#conteudo" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 botao-ouro">
       Pular para o conteúdo
     </a>
-    <Header />
+    <Header simples={cabecalhoSimples} contato={contato} />
     <main id="conteudo">
       <slot />
     </main>
     <Footer />
-    <WhatsAppButton />
+    <WhatsAppButton mensagem={contato?.mensagem} />
     {temRastreamento && <ConsentBanner />}
   </body>
 </html>

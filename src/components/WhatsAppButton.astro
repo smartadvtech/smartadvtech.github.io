@@ -2,7 +2,12 @@
 // O botão flutuante do WhatsApp. Só aparece com o número em src/config.ts.
 import { linkDoWhatsApp } from '../lib/contato';
 
-const link = linkDoWhatsApp();
+interface Props {
+  /** A mensagem pronta da página; sem ela, a do site */
+  mensagem?: string;
+}
+
+const link = linkDoWhatsApp(Astro.props.mensagem);
 ---
 
 {
