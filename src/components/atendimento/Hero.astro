@@ -29,7 +29,7 @@ import { linkDeContato } from '../../lib/contato';
       </h1>
       <p class="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-pretty text-nevoa lg:mx-0">{hero.texto}</p>
       <div class="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:justify-center sm:gap-4 lg:justify-start">
-        <a href={linkDeContato(contato)} class="botao-ouro w-full max-w-xs sm:w-auto" data-rastrear="atendimento">
+        <a href={linkDeContato(contato)} class="botao-ouro w-full max-w-xs sm:w-auto" data-rastrear={contato.rastrear}>
           Quero um diagnóstico gratuito
         </a>
         <a href="#como-funciona" class="botao-contorno w-full max-w-xs sm:w-auto">Veja como funciona</a>

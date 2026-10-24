@@ -7,6 +7,7 @@ import type { Resultados } from './site';
 export const contato = {
   mensagem: 'Olá! Vi a página do atendimento no WhatsApp e quero um diagnóstico gratuito.',
   assunto: 'Diagnóstico do atendimento no WhatsApp',
+  rastrear: 'atendimento',
 };
 
 export const hero = {

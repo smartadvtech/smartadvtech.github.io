@@ -1,12 +1,13 @@
 import { config } from '../config';
 
 /**
- * O que uma página diz no primeiro contato: a mensagem pronta do WhatsApp e o assunto do e-mail. A página de uma
- * campanha usa os dela, para o lead chegar dizendo de onde veio.
+ * O primeiro contato numa página: a mensagem pronta do WhatsApp, o assunto do e-mail e o método do evento de lead
+ * (data-rastrear). A página de uma campanha usa os dela, para o lead chegar dizendo de onde veio.
  */
 export interface Contato {
   mensagem?: string;
   assunto?: string;
+  rastrear?: string;
 }
 
 export function linkDoWhatsApp(mensagem: string = config.whatsapp.mensagem): string | undefined {

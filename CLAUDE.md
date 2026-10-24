@@ -44,8 +44,9 @@ O site institucional e comercial da SmartADV (`smartadvtech.com.br`), em Astro, 
 - **Texto novo:** em português, no tom do resto do site, e só o que a SmartADV entrega hoje. A IA do chatbot está
   desligada e não aparece.
 - **Página de campanha** (como a `/atendimento`): `cabecalhoSimples` no `Base` (só o logo e o botão, sem o menu que leva
-  para fora dela), a imagem de preview própria (`imagem`) e o `contato` com a mensagem e o assunto da página, para o
-  lead chegar dizendo de onde veio. Os botões levam um `data-rastrear` próprio, que vira o método do evento de lead.
+  para fora dela), a imagem de preview própria (`imagem`) e o `contato` da página: a mensagem, o assunto e o
+  `rastrear`, o método do evento de lead, para o lead chegar dizendo de onde veio. Todo botão de contato usa esse
+  mesmo `contato`.
 - **Animação:** sem fade de opacidade em texto. O Lighthouse mede o contraste no meio da animação e reprova; esconda com
   `visibility` até a vez do elemento e respeite o `prefers-reduced-motion`.
 - **Vídeo:** hospedado no `public/`, num `<video>` com `preload="none"`, nunca um player de terceiros (YouTube,

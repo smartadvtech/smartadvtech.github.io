@@ -16,7 +16,7 @@ const { video } = Astro.props;
   <div class="grid items-center gap-14 lg:grid-cols-[1.2fr_1fr]">
     <div class="flex flex-col items-center lg:items-start">
       <Titulo id="demonstracao-titulo" eyebrow="Veja funcionando" titulo={demonstracao.titulo} texto={demonstracao.texto} />
-      <a href={linkDeContato(contato)} class="botao-ouro mt-10" data-rastrear="atendimento">Quero isso no meu escritório</a>
+      <a href={linkDeContato(contato)} class="botao-ouro mt-10" data-rastrear={contato.rastrear}>Quero isso no meu escritório</a>
     </div>
 
     <div class="mx-auto w-full max-w-xs overflow-hidden rounded-[2rem] border-8 border-navy-950 bg-navy-950 shadow-2xl shadow-navy-950/30">
