@@ -146,8 +146,25 @@ export const entregas = [
 ];
 
 // A prova social: números medidos num escritório atendido pela SmartADV, sem o nome dele. O repositório é público, e
-// entrar aqui já é publicar: os números só entram depois de aprovados. null esconde a seção.
-export const prova: Resultados | null = null;
+// entrar aqui já é publicar: número novo só entra depois de aprovado. null esconde a seção.
+export const prova: Resultados | null = {
+  titulo: 'Nasceu dentro de um escritório trabalhista',
+  texto:
+    'Antes de virar produto, o atendimento foi construído e testado durante 5 anos num escritório trabalhista atendido ' +
+    'pela SmartADV. Os números são de lá.',
+  numeros: [
+    {
+      valor: '3 em 4',
+      legenda: 'consultas de andamento, audiência e perícia respondidas na hora, sem passar pela equipe (outubro de 2026)',
+    },
+    {
+      valor: '1 em 4',
+      legenda: 'consultas chegam fora do horário comercial: à noite, de madrugada ou no fim de semana (outubro de 2026)',
+    },
+    { valor: '+1.000', legenda: 'consultas por mês num só escritório (abril a setembro de 2026)' },
+    { valor: '5 anos', legenda: 'de laboratório num escritório de verdade antes de chegar ao seu' },
+  ],
+};
 
 export const transparencia = [
   {
