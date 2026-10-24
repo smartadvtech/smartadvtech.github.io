@@ -23,7 +23,7 @@ export const config = {
 
   // Só dígitos, com o 55 e o DDD (por exemplo, 5511999999999). Vazio: sem botão, e o contato vai pelo e-mail.
   whatsapp: {
-    numero: '',
+    numero: '5511999999999',
     mensagem: 'Olá! Vim pelo site da SmartADV e quero saber mais.',
   },
 
