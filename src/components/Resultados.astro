@@ -12,10 +12,12 @@ const { dados: resultados } = Astro.props;
 <section class="mx-auto max-w-6xl px-4 py-24 sm:px-6" aria-labelledby="resultados-titulo">
   <Titulo id="resultados-titulo" eyebrow="Resultados" titulo={resultados.titulo} texto={resultados.texto} />
 
+  {/* O número vem antes da legenda na tela e depois dela no HTML (dt e dd): o flex-col-reverse inverte, e o justify-end
+      alinha os números no topo de cada cartão, mesmo com legendas de tamanhos diferentes */}
   <dl class="mt-14 grid gap-px overflow-hidden rounded-sm border border-navy-950/10 bg-navy-950/10 sm:grid-cols-2 lg:grid-cols-4">
     {
       resultados.numeros.map(({ valor, legenda }) => (
-        <div class="flex flex-col-reverse bg-white p-8">
+        <div class="flex flex-col-reverse justify-end bg-white p-8">
           <dt class="mt-2 text-sm leading-relaxed text-tinta-suave">{legenda}</dt>
           <dd class="font-serif text-5xl font-semibold text-navy-950">{valor}</dd>
         </div>
