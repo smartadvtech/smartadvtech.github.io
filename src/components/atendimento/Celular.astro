@@ -1,0 +1,67 @@
+---
+// Um celular com a conversa de uma consulta pelo WhatsApp, em HTML: leve, nítido em qualquer tela e legível por leitor
+// de tela. É uma ilustração, com dados fictícios; a consulta real está no vídeo da página.
+import { conversa } from '../../data/atendimento';
+---
+
+<figure class="mx-auto w-full max-w-xs">
+  <div class="overflow-hidden rounded-[2.5rem] border-[10px] border-navy-800 bg-[#efeae2] shadow-2xl shadow-black/50">
+    <div class="flex items-center gap-3 bg-[#f0f2f5] px-4 py-3">
+      <span class="flex size-9 items-center justify-center rounded-full bg-navy-950 font-serif text-lg font-semibold text-ouro-300" aria-hidden="true">
+        E
+      </span>
+      <div class="text-left leading-tight">
+        <p class="text-sm font-semibold text-[#111b21]">Seu escritório</p>
+        <p class="text-xs text-[#54656f]">online</p>
+      </div>
+    </div>
+
+    <ol class="flex min-h-[26rem] flex-col gap-2 px-3 py-4 text-left text-[13px] leading-snug text-[#111b21]">
+      {
+        conversa.map(({ de, texto }, i) =>
+          de === 'opcoes' ? (
+            <li class="mensagem w-[80%] overflow-hidden rounded-lg bg-white shadow-sm" style={`--i: ${i}`}>
+              {texto.map((opcao) => (
+                <p class="border-t border-[#e9edef] px-3 py-2 text-center font-medium text-[#008069] first:border-t-0">{opcao}</p>
+              ))}
+            </li>
+          ) : (
+            <li
+              class:list={[
+                'mensagem max-w-[80%] rounded-lg px-3 py-2 whitespace-pre-line shadow-sm',
+                de === 'cliente' ? 'self-end bg-[#d9fdd3]' : 'bg-white',
+              ]}
+              style={`--i: ${i}`}
+            >
+              <span class="sr-only">{de === 'cliente' ? 'Cliente: ' : 'Escritório: '}</span>
+              {texto}
+            </li>
+          ),
+        )
+      }
+    </ol>
+  </div>
+  <figcaption class="mt-4 text-center text-xs text-nevoa-suave">Ilustração com dados fictícios</figcaption>
+</figure>
+
+<style>
+  /* As mensagens chegam uma depois da outra, como numa conversa. Sem animação para quem pediu menos movimento.
+     Sem fade de opacidade: o texto semitransparente reprova no contraste (Lighthouse). A mensagem fica escondida
+     (visibility) até a vez dela e entra deslizando. */
+  @media (prefers-reduced-motion: no-preference) {
+    .mensagem {
+      animation: chega 0.45s ease-out both;
+      animation-delay: calc(var(--i) * 0.7s + 0.4s);
+    }
+  }
+
+  @keyframes chega {
+    from {
+      visibility: hidden;
+      transform: translateY(14px) scale(0.96);
+    }
+    1% {
+      visibility: visible;
+    }
+  }
+</style>

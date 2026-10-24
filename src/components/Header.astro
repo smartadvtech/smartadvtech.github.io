@@ -1,10 +1,20 @@
 ---
 import { Image } from 'astro:assets';
 import simbolo from '../assets/logo/simbolo.png';
-import { linkDeContato } from '../lib/contato';
+import { linkDeContato, type Contato } from '../lib/contato';
 
-// Com a barra na frente, os links funcionam também a partir da política de privacidade
+interface Props {
+  /** Só o logo e o botão de contato, para a página de uma campanha */
+  simples?: boolean;
+  contato?: Contato;
+}
+
+const { simples = false, contato } = Astro.props;
+const linkDoBotao = linkDeContato(contato);
+
+// Com a barra na frente, os links funcionam também a partir das outras páginas
 const links = [
+  { href: '/atendimento', texto: 'Atendimento' },
   { href: '/#solucoes', texto: 'Soluções' },
   { href: '/#jornada', texto: 'Jornada' },
   { href: '/#metodologia', texto: 'Como trabalhamos' },
@@ -19,31 +29,41 @@ const links = [
       <Image src={simbolo} alt="" height={40} densities={[1, 2]} class="h-10 w-auto" loading="eager" />
     </a>
 
-    <nav aria-label="Principal" class="hidden items-center gap-8 lg:flex">
-      {links.map(({ href, texto }) => <a href={href} class="text-sm text-nevoa transition-colors hover:text-ouro-300">{texto}</a>)}
-      <a href={linkDeContato()} class="botao-ouro px-5 py-2.5" data-rastrear="contato">Fale com a gente</a>
-    </nav>
+    {
+      simples ? (
+        <a href={linkDoBotao} class="botao-ouro px-5 py-2.5" data-rastrear={contato?.rastrear ?? 'contato'}>
+          Diagnóstico gratuito
+        </a>
+      ) : (
+        <Fragment>
+          <nav aria-label="Principal" class="hidden items-center gap-8 lg:flex">
+            {links.map(({ href, texto }) => <a href={href} class="text-sm text-nevoa transition-colors hover:text-ouro-300">{texto}</a>)}
+            <a href={linkDoBotao} class="botao-ouro px-5 py-2.5" data-rastrear="contato">Fale com a gente</a>
+          </nav>
 
-    <details class="group relative lg:hidden">
-      <summary
-        class="flex cursor-pointer list-none items-center rounded-sm p-2 text-nevoa hover:text-ouro-300 [&::-webkit-details-marker]:hidden"
-        aria-label="Abrir o menu"
-      >
-        <svg class="size-6 group-open:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-          <path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="round"></path>
-        </svg>
-        <svg class="hidden size-6 group-open:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-          <path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"></path>
-        </svg>
-      </summary>
-      <nav
-        aria-label="Principal"
-        class="absolute right-0 mt-3 flex w-64 flex-col gap-1 rounded-sm border border-white/10 bg-navy-900 p-3 shadow-2xl"
-      >
-        {links.map(({ href, texto }) => <a href={href} class="rounded-sm px-3 py-2.5 text-sm text-nevoa hover:bg-white/5 hover:text-ouro-300">{texto}</a>)}
-        <a href={linkDeContato()} class="botao-ouro mt-2" data-rastrear="contato">Fale com a gente</a>
-      </nav>
-    </details>
+          <details class="group relative lg:hidden">
+            <summary
+              class="flex cursor-pointer list-none items-center rounded-sm p-2 text-nevoa hover:text-ouro-300 [&::-webkit-details-marker]:hidden"
+              aria-label="Abrir o menu"
+            >
+              <svg class="size-6 group-open:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="round"></path>
+              </svg>
+              <svg class="hidden size-6 group-open:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"></path>
+              </svg>
+            </summary>
+            <nav
+              aria-label="Principal"
+              class="absolute right-0 mt-3 flex w-64 flex-col gap-1 rounded-sm border border-white/10 bg-navy-900 p-3 shadow-2xl"
+            >
+              {links.map(({ href, texto }) => <a href={href} class="rounded-sm px-3 py-2.5 text-sm text-nevoa hover:bg-white/5 hover:text-ouro-300">{texto}</a>)}
+              <a href={linkDoBotao} class="botao-ouro mt-2" data-rastrear="contato">Fale com a gente</a>
+            </nav>
+          </details>
+        </Fragment>
+      )
+    }
   </div>
 </header>
 

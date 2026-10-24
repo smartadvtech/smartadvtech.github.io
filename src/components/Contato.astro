@@ -1,7 +1,16 @@
 ---
 import { config } from '../config';
-import { contato } from '../data/site';
-import { linkDeContato, linkDoWhatsApp } from '../lib/contato';
+import { contato as padrao } from '../data/site';
+import { linkDeContato, linkDoWhatsApp, type Contato } from '../lib/contato';
+
+interface Props {
+  titulo?: string;
+  texto?: string;
+  /** O primeiro contato na página de uma campanha: a mensagem, o assunto e o método do evento de lead */
+  contato?: Contato;
+}
+
+const { titulo = padrao.titulo, texto = padrao.texto, contato } = Astro.props;
 ---
 
 <section id="contato" class="relative overflow-hidden bg-navy-950" aria-labelledby="contato-titulo">
@@ -19,11 +28,11 @@ import { linkDeContato, linkDoWhatsApp } from '../lib/contato';
       Contato
       <span class="filete" aria-hidden="true"></span>
     </p>
-    <h2 id="contato-titulo" class="mt-6 font-serif text-4xl font-semibold text-white sm:text-5xl">{contato.titulo}</h2>
-    <p class="mx-auto mt-5 max-w-2xl text-lg text-nevoa">{contato.texto}</p>
+    <h2 id="contato-titulo" class="mt-6 font-serif text-4xl font-semibold text-balance text-white sm:text-5xl">{titulo}</h2>
+    <p class="mx-auto mt-5 max-w-2xl text-lg text-nevoa">{texto}</p>
 
     <div class="mt-10 flex flex-wrap justify-center gap-4">
-      <a href={linkDeContato()} class="botao-ouro" data-rastrear="contato">
+      <a href={linkDeContato(contato)} class="botao-ouro" data-rastrear={contato?.rastrear ?? 'contato'}>
         {linkDoWhatsApp() ? 'Conversar pelo WhatsApp' : 'Escrever para a SmartADV'}
       </a>
     </div>
