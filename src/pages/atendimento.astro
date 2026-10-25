@@ -5,6 +5,7 @@ import Dores from '../components/atendimento/Dores.astro';
 import AntesDepois from '../components/atendimento/AntesDepois.astro';
 import ComoFunciona from '../components/atendimento/ComoFunciona.astro';
 import Demonstracao from '../components/atendimento/Demonstracao.astro';
+import Ia from '../components/atendimento/Ia.astro';
 import Entregas from '../components/atendimento/Entregas.astro';
 import Metodologia from '../components/Metodologia.astro';
 import Resultados from '../components/Resultados.astro';
@@ -16,8 +17,8 @@ import { config } from '../config';
 import { chamadaFinal, contato, metodologia, planos, prova, video } from '../data/atendimento';
 
 const descricao =
-  'Tire o atendimento do seu WhatsApp pessoal: triagem automática, equipe treinada e consulta de processo a qualquer ' +
-  'hora. Pronto em até 30 dias.';
+  'Tire o atendimento do seu WhatsApp pessoal: triagem, consulta de processo a qualquer hora, IA para as dúvidas e ' +
+  'equipe treinada. Pronto em até 30 dias.';
 
 const servico = {
   '@context': 'https://schema.org',
@@ -56,6 +57,7 @@ const servico = {
   <AntesDepois />
   <ComoFunciona />
   {video && <Demonstracao video={video} />}
+  <Ia />
   <Entregas />
   <Metodologia titulo={metodologia.titulo} />
   {prova && <Resultados dados={prova} />}
