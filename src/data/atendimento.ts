@@ -14,9 +14,8 @@ export const hero = {
   eyebrow: 'Atendimento no WhatsApp para escritórios de advocacia',
   titulo: 'Tire o atendimento do seu WhatsApp pessoal.',
   texto:
-    'Deixamos a área de atendimento do seu escritório pronta: o WhatsApp do escritório numa plataforma para a ' +
-    'equipe, triagem automática, equipe treinada e um assistente que informa andamento, audiência e perícia ao ' +
-    'cliente a qualquer hora, direto do sistema de gestão do escritório.',
+    'Seu cliente fala com o WhatsApp do escritório, e a equipe toda atende num lugar só. Andamento, audiência e ' +
+    'perícia são informados automaticamente, a qualquer hora. Nós configuramos tudo e treinamos a equipe.',
   detalhe: 'A partir de R$ 69,90/mês · pronto em até 30 dias',
 };
 
