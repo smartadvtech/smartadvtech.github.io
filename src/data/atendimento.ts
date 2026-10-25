@@ -13,7 +13,7 @@ export const contato = {
 
 export const hero = {
   eyebrow: 'Atendimento no WhatsApp para escritórios de advocacia',
-  titulo: 'Tire o atendimento do seu WhatsApp pessoal.',
+  titulo: 'Tire o atendimento do seu WhatsApp pessoal. Seu cliente consulta o processo sozinho, a qualquer hora.',
   texto:
     'Seu cliente fala com o WhatsApp do escritório, e a equipe toda atende num lugar só. Andamento, audiência e ' +
     'perícia são informados automaticamente, a qualquer hora, e uma IA pode responder às outras dúvidas. Nós ' +
