@@ -41,8 +41,9 @@ O site institucional e comercial da SmartADV (`smartadvtech.com.br`), em Astro, 
   - listas e cartões de texto ficam à esquerda em qualquer largura.
 - **Conferência:** Lighthouse com acessibilidade, boas práticas e SEO em 100, no site publicado. Na prévia local, o
   canonical aponta para o domínio.
-- **Texto novo:** em português, no tom do resto do site, e só o que a SmartADV entrega hoje. A IA do chatbot está
-  desligada e não aparece.
+- **Texto novo:** em português, no tom do resto do site, e só o que a SmartADV entrega hoje. A IA das perguntas fora
+  do menu aparece só na página do atendimento, e sempre como adicional: fora dos planos e ligada só com a autorização
+  do escritório.
 - **Página de campanha** (como a `/atendimento`): `cabecalhoSimples` no `Base` (só o logo e o botão, sem o menu que leva
   para fora dela), a imagem de preview própria (`imagem`) e o `contato` da página: a mensagem, o assunto e o
   `rastrear`, o método do evento de lead, para o lead chegar dizendo de onde veio. Todo botão de contato usa esse

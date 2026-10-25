@@ -1,6 +1,7 @@
 /**
  * Os textos da página do atendimento no WhatsApp (/atendimento), a página da campanha. Só o que a SmartADV entrega
- * hoje, sem o nome das ferramentas e sem a IA, que está desligada.
+ * hoje, sem o nome das ferramentas. A IA das perguntas fora do menu aparece sempre como adicional: fica fora dos
+ * planos e só é ligada com a autorização do escritório.
  */
 import type { Resultados } from './site';
 
@@ -14,9 +15,9 @@ export const hero = {
   eyebrow: 'Atendimento no WhatsApp para escritórios de advocacia',
   titulo: 'Tire o atendimento do seu WhatsApp pessoal.',
   texto:
-    'Deixamos a área de atendimento do seu escritório pronta: o WhatsApp do escritório numa plataforma para a ' +
-    'equipe, triagem automática, equipe treinada e um assistente que informa andamento, audiência e perícia ao ' +
-    'cliente a qualquer hora, direto do sistema de gestão do escritório.',
+    'Seu cliente fala com o WhatsApp do escritório, e a equipe toda atende num lugar só. Andamento, audiência e ' +
+    'perícia são informados automaticamente, a qualquer hora, e uma IA pode responder às outras dúvidas. Nós ' +
+    'configuramos tudo e treinamos a equipe.',
   detalhe: 'A partir de R$ 69,90/mês · pronto em até 30 dias',
 };
 
@@ -114,8 +115,25 @@ export const demonstracao = {
   titulo: 'Uma consulta real, num sábado à tarde',
   texto:
     'O cliente pediu o andamento do processo e recebeu a resposta em segundos, sem ninguém da equipe precisar parar o ' +
-    'fim de semana. Os dados do escritório e do cliente foram ocultados.',
+    'fim de semana. Os dados do escritório e do cliente foram ocultados. Depois, uma pergunta fora do menu respondida ' +
+    'pela IA, numa tela recriada com a pergunta e a resposta reais.',
 };
+
+export const ia = [
+  {
+    titulo: 'Respostas do seu escritório',
+    texto: 'A IA responde a partir de uma base de respostas preparada pela SmartADV e ajustada ao seu escritório.',
+  },
+  {
+    titulo: 'Na dúvida, passa para a equipe',
+    texto: 'Quando a resposta não está na base, ou a IA fica em dúvida, a conversa vai para uma pessoa da equipe.',
+  },
+  {
+    titulo: 'O escritório decide',
+    texto:
+      'É opcional: só é ligada com a autorização do escritório, e o preço é combinado no diagnóstico, fora dos planos.',
+  },
+];
 
 export const entregas = [
   {
@@ -141,10 +159,15 @@ export const entregas = [
     texto: 'Treinamento ao vivo, com a gravação para quem chegar depois, e o fluxo de atendimento documentado.',
   },
   {
-    titulo: 'Go-live acompanhado',
+    titulo: 'Entrada em operação acompanhada',
     texto: 'Validamos juntos o início da operação e ajustamos o que for preciso.',
   },
 ];
+
+// Os passos são os da home (src/data/site.ts); só o título fala do atendimento.
+export const metodologia = {
+  titulo: 'Do primeiro encontro ao primeiro atendimento',
+};
 
 // A prova social: números medidos num escritório atendido pela SmartADV, sem o nome dele. O repositório é público, e
 // entrar aqui já é publicar: número novo só entra depois de aprovado. null esconde a seção.
@@ -163,7 +186,7 @@ export const prova: Resultados | null = {
       legenda: 'consultas chegam fora do horário comercial: à noite, de madrugada ou no fim de semana (outubro de 2026)',
     },
     { valor: '+1.000', legenda: 'consultas por mês num só escritório (abril a setembro de 2026)' },
-    { valor: '5 anos', legenda: 'de laboratório num escritório de verdade antes de chegar ao seu' },
+    { valor: '5 anos', legenda: 'de operação num escritório de verdade antes de chegar ao seu' },
   ],
 };
 
@@ -187,8 +210,8 @@ export const transparencia = [
   {
     titulo: 'Dados protegidos (LGPD)',
     texto:
-      'O texto das conversas não fica nos nossos registros, os dados ficam em São Paulo, e o contrato define o papel de ' +
-      'cada um.',
+      'Os registros ficam em São Paulo, sem o texto das conversas, e o contrato define o papel de cada um, inclusive o ' +
+      'do fornecedor da IA, se ela for ligada.',
   },
   {
     titulo: 'Sempre uma pessoa por perto',
@@ -210,6 +233,9 @@ export const planos = {
     'Aviso de uso da cota por e-mail',
     'Sem cobrança por consulta',
   ],
+  adicional:
+    'A IA para as perguntas fora do menu é um adicional, orçado no diagnóstico e ligado só com a autorização do ' +
+    'escritório.',
   consulta:
     'Consulta é cada pedido de andamento, audiência ou perícia que um cliente faz ao assistente. No diagnóstico, ' +
     'estimamos o plano pelo volume de clientes do escritório.',
@@ -222,8 +248,16 @@ export const perguntas = [
   {
     pergunta: 'Meu cliente vai conversar com um robô?',
     resposta:
-      'Só para o que um robô faz bem: informar o andamento, a data da audiência e a da perícia. Para todo o resto, e ' +
-      'sempre que o assistente não encontra a informação, a conversa vai para uma pessoa da equipe.',
+      'Só para o que um robô faz bem: informar o andamento, a data da audiência e a da perícia e, com o adicional de ' +
+      'IA, responder às dúvidas mais comuns. Para todo o resto, e sempre que o assistente não encontra a informação, a ' +
+      'conversa vai para uma pessoa da equipe.',
+  },
+  {
+    pergunta: 'E se a IA não souber responder?',
+    resposta:
+      'Ela passa a conversa para uma pessoa da equipe. A IA responde a partir da base de respostas, e o que não está ' +
+      'nela, ou deixa dúvida, vai para a equipe. A equipe vê todas as conversas na plataforma de atendimento, e a ' +
+      'base é ajustada sempre que o escritório pedir.',
   },
   {
     pergunta: 'Preciso trocar de número?',
@@ -240,7 +274,8 @@ export const perguntas = [
   {
     pergunta: 'Quanto tempo leva?',
     resposta:
-      'Até 30 dias depois da contratação das ferramentas: kickoff, configuração, treinamento e o go-live acompanhado.',
+      'Até 30 dias depois da contratação das ferramentas: o primeiro encontro, a configuração, o treinamento e a ' +
+      'entrada em operação acompanhada.',
   },
   {
     pergunta: 'Preciso de alguém de TI?',
@@ -258,7 +293,8 @@ export const perguntas = [
     resposta:
       'Continuam do escritório: a SmartADV só os trata para prestar o serviço. Os registros ficam em São Paulo, o texto ' +
       'das conversas não fica nos nossos registros, e o contrato traz as regras da LGPD, com o papel de cada um, os ' +
-      'prazos de guarda e o aviso em caso de incidente.',
+      'prazos de guarda e o aviso em caso de incidente. Com a IA ligada, as conversas com o assistente passam também ' +
+      'pelo fornecedor da IA, que entra no contrato como suboperador.',
   },
   {
     pergunta: 'E se passar da cota do mês?',
@@ -271,7 +307,8 @@ export const perguntas = [
     resposta:
       'A mensalidade do atendimento automático vai de R$ 69,90 (até 200 consultas por mês) a R$ 290 (até 3.000), em ' +
       'quatro planos. A implantação é orçada no diagnóstico, conforme o tamanho do escritório. A plataforma de ' +
-      'atendimento e o sistema de gestão são pagos direto aos fornecedores.',
+      'atendimento e o sistema de gestão são pagos direto aos fornecedores. A IA para as perguntas fora do menu é um ' +
+      'adicional, orçado à parte.',
   },
 ];
 
