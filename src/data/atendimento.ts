@@ -168,7 +168,7 @@ export const prova: Resultados | null = {
       legenda: 'consultas chegam fora do horário comercial: à noite, de madrugada ou no fim de semana (outubro de 2026)',
     },
     { valor: '+1.000', legenda: 'consultas por mês num só escritório (abril a setembro de 2026)' },
-    { valor: '5 anos', legenda: 'de laboratório num escritório de verdade antes de chegar ao seu' },
+    { valor: '5 anos', legenda: 'de operação num escritório de verdade antes de chegar ao seu' },
   ],
 };
 
