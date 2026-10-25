@@ -120,7 +120,10 @@ export const metodologia = {
   titulo: 'Do primeiro encontro à entrada em operação',
   passos: [
     { titulo: 'Início', texto: 'Alinhamos expectativas, prazos e responsáveis com a equipe do escritório.' },
-    { titulo: 'Configuração', texto: 'Preparamos as ferramentas, os fluxos e os processos para o dia a dia do escritório.' },
+    {
+      titulo: 'Configuração',
+      texto: 'Preparamos as ferramentas, os fluxos e os processos para o dia a dia do escritório.',
+    },
     { titulo: 'Treinamento', texto: 'Encontros ao vivo, com a gravação para quem chegar depois.' },
     { titulo: 'Entrada em operação', texto: 'Validamos juntos e acompanhamos o início da operação.' },
   ],
