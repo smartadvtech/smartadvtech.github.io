@@ -141,10 +141,15 @@ export const entregas = [
     texto: 'Treinamento ao vivo, com a gravação para quem chegar depois, e o fluxo de atendimento documentado.',
   },
   {
-    titulo: 'Go-live acompanhado',
+    titulo: 'Entrada em operação acompanhada',
     texto: 'Validamos juntos o início da operação e ajustamos o que for preciso.',
   },
 ];
+
+// Os passos são os da home (src/data/site.ts); só o título fala do atendimento.
+export const metodologia = {
+  titulo: 'Do primeiro encontro ao primeiro atendimento',
+};
 
 // A prova social: números medidos num escritório atendido pela SmartADV, sem o nome dele. O repositório é público, e
 // entrar aqui já é publicar: número novo só entra depois de aprovado. null esconde a seção.
@@ -240,7 +245,8 @@ export const perguntas = [
   {
     pergunta: 'Quanto tempo leva?',
     resposta:
-      'Até 30 dias depois da contratação das ferramentas: kickoff, configuração, treinamento e o go-live acompanhado.',
+      'Até 30 dias depois da contratação das ferramentas: o primeiro encontro, a configuração, o treinamento e a ' +
+      'entrada em operação acompanhada.',
   },
   {
     pergunta: 'Preciso de alguém de TI?',
