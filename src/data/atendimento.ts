@@ -115,7 +115,8 @@ export const demonstracao = {
   titulo: 'Uma consulta real, num sábado à tarde',
   texto:
     'O cliente pediu o andamento do processo e recebeu a resposta em segundos, sem ninguém da equipe precisar parar o ' +
-    'fim de semana. Os dados do escritório e do cliente foram ocultados.',
+    'fim de semana. Os dados do escritório e do cliente foram ocultados. Depois, uma pergunta fora do menu respondida ' +
+    'pela IA, numa tela recriada com a pergunta e a resposta reais.',
 };
 
 export const ia = [
