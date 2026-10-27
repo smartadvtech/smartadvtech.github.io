@@ -293,8 +293,8 @@ export const perguntas = [
     resposta:
       'Continuam do escritório: a SmartADV só os trata para prestar o serviço. Os registros ficam em São Paulo, o texto ' +
       'das conversas não fica nos nossos registros, e o contrato traz as regras da LGPD, com o papel de cada um, os ' +
-      'prazos de guarda e o aviso em caso de incidente. Com a IA ligada, as conversas com o assistente passam também ' +
-      'pelo fornecedor da IA, que entra no contrato como suboperador.',
+      'prazos de guarda e o aviso em caso de incidente. Com a IA ligada, só as perguntas fora do menu passam pelo ' +
+      'fornecedor da IA, sem os dados dos processos, e ele entra no contrato como suboperador.',
   },
   {
     pergunta: 'E se passar da cota do mês?',
