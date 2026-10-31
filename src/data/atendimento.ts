@@ -102,8 +102,8 @@ export const comoFunciona = [
   },
 ];
 
-// O vídeo da campanha, que chega pronto e já com os dados ocultados: trocar é substituir os arquivos em public/videos/.
-// null esconde a seção.
+// O vídeo da campanha, que chega pronto, com os nomes e os números de processo fictícios: trocar é substituir os
+// arquivos em public/videos/. null esconde a seção.
 export const video: { src: string; poster: string; largura: number; altura: number } | null = {
   src: '/videos/atendimento.mp4',
   poster: '/videos/atendimento-poster.jpg',
@@ -115,8 +115,8 @@ export const demonstracao = {
   titulo: 'Uma consulta real, num sábado à tarde',
   texto:
     'O cliente pediu o andamento do processo e recebeu a resposta em segundos, sem ninguém da equipe precisar parar o ' +
-    'fim de semana. Os dados do escritório e do cliente foram ocultados. Depois, uma pergunta fora do menu respondida ' +
-    'pela IA, numa tela recriada com a pergunta e a resposta reais.',
+    'fim de semana. Depois, uma pergunta fora do menu, de outra conversa, respondida pela IA. A tela é recriada com as ' +
+    'mensagens reais, e os nomes e os números de processo são fictícios.',
 };
 
 export const ia = [
