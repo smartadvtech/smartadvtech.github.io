@@ -1,12 +1,13 @@
 ---
 // O vídeo de uma consulta real, hospedado no próprio site: um player de terceiros (YouTube, Instagram) carregaria antes
-// do consentimento. Só baixa quando a pessoa aperta o play (preload="none").
+// do consentimento. Só baixa quando a pessoa aperta o play (preload="none"). Embaixo, a transcrição: o vídeo não tem
+// som, e o texto dele precisa de uma alternativa para quem não o vê (WCAG 2.2, critério 1.2.1).
 import Titulo from '../Titulo.astro';
-import { contato, demonstracao } from '../../data/atendimento';
+import { contato, demonstracao, type Video } from '../../data/atendimento';
 import { linkDeContato } from '../../lib/contato';
 
 interface Props {
-  video: { src: string; poster: string; largura: number; altura: number };
+  video: Video;
 }
 
 const { video } = Astro.props;
@@ -34,4 +35,30 @@ const { video } = Astro.props;
       </video>
     </div>
   </div>
+
+  <details class="group mt-16 max-w-3xl border-y border-navy-950/10">
+    <summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-5 font-semibold text-navy-950 hover:text-ouro-800 [&::-webkit-details-marker]:hidden">
+      Transcrição do vídeo
+      <svg class="size-5 shrink-0 text-ouro-600 transition-transform group-open:rotate-45" viewBox="0 0 20 20" aria-hidden="true">
+        <path d="M10 4v12M4 10h12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+      </svg>
+    </summary>
+    <ol class="space-y-8 pb-8 leading-relaxed text-tinta-suave">
+      {
+        video.transcricao.map((cena) => (
+          <li class="space-y-3">
+            {cena.map((trecho) =>
+              typeof trecho === 'string' ? (
+                <p>{trecho}</p>
+              ) : (
+                <p class="border-l-2 border-ouro-500/50 pl-4 whitespace-pre-line wrap-break-word">
+                  <strong class="font-semibold text-navy-950">{trecho.de}:</strong> {trecho.texto}
+                </p>
+              ),
+            )}
+          </li>
+        ))
+      }
+    </ol>
+  </details>
 </section>
