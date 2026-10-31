@@ -19,6 +19,11 @@ updates:
     groups:
       minor-e-patch:
         update-types: [minor, patch]
+    ignore:
+      # O @astrojs/check 0.9 só aceita o TypeScript 5 ou 6 (peer dependency), e o 7 quebra o npm ci. Tirar quando uma
+      # versão dele aceitar o 7
+      - dependency-name: typescript
+        update-types: ["version-update:semver-major"]
     labels: [dependencias, sem-revisao]
 
   # As actions dos workflows, uma vez por mês e todas num PR.
