@@ -1,0 +1,36 @@
+# Dependabot: as atualizações de rotina das dependências. Os PRs de segurança não dependem deste arquivo: estão ligados
+# nas configurações do repositório e chegam a qualquer hora.
+# - cooldown: uma versão só é proposta 7 dias depois de lançada. Versão comprometida costuma ser descoberta e retirada
+#   nos primeiros dias. Não atrasa os PRs de segurança.
+# - As minor e as patch vêm juntas num PR só; uma major vem num PR dela, porque pode quebrar.
+# - O PR leva a label sem-revisao: a revisão por agente não roda nele, e o build do PR é a conferência.
+version: 2
+updates:
+  # O Astro e as dependências do site, toda segunda; o build do PR confere.
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "08:00"
+      timezone: America/Sao_Paulo
+    cooldown:
+      default-days: 7
+    groups:
+      minor-e-patch:
+        update-types: [minor, patch]
+    labels: [dependencias, sem-revisao]
+
+  # As actions dos workflows, uma vez por mês e todas num PR.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+      time: "08:00"
+      timezone: America/Sao_Paulo
+    cooldown:
+      default-days: 7
+    groups:
+      actions:
+        patterns: ["*"]
+    labels: [dependencias, sem-revisao]

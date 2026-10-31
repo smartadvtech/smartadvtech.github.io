@@ -23,11 +23,14 @@ jobs:
     # "revisar", para revisar de novo depois de mudanças. Push não dispara: cada revisão gasta o limite da assinatura.
     # Rascunho nunca é revisado, nem o PR que fica pronto com a label "sem-revisao": a pessoa decidiu que ele não
     # precisa (CONVENCOES.md, no smartadv). A label "revisar" ainda pede uma revisão nele. PR de fork nunca é revisado.
+    # PR aberto pelo Dependabot também não: o evento dele não recebe os secrets, e a revisão quebraria. A label
+    # "revisar", posta por uma pessoa, ainda pede a revisão.
     if: >-
       github.event.pull_request.draft == false &&
       github.event.pull_request.head.repo.full_name == github.repository &&
       ((github.event.action == 'labeled' && github.event.label.name == 'revisar') ||
-       (github.event.action != 'labeled' && !contains(github.event.pull_request.labels.*.name, 'sem-revisao')))
+       (github.event.action != 'labeled' && github.actor != 'dependabot[bot]' &&
+        !contains(github.event.pull_request.labels.*.name, 'sem-revisao')))
     # Uma revisão por PR de cada vez: uma nova cancela a que estiver rodando
     concurrency:
       group: revisao-pr-${{ github.event.pull_request.number }}
