@@ -23,7 +23,7 @@ interface Props {
   contato?: Contato;
 }
 
-const { titulo, descricao, imagem: imagemDaPagina = '/og.png', cabecalhoSimples = false, contato } = Astro.props;
+const { titulo, descricao, imagem: imagemDaPagina = '/og.jpg', cabecalhoSimples = false, contato } = Astro.props;
 const canonical = new URL(Astro.url.pathname, config.url).href;
 const imagem = new URL(imagemDaPagina, config.url).href;
 const { razaoSocial, cnpj } = config.empresa;

@@ -1,0 +1,30 @@
+---
+import Titulo from '../Titulo.astro';
+import { experiencia } from '../../data/consultoria';
+---
+
+<section class="border-t border-navy-950/10 bg-white" aria-labelledby="experiencia-titulo">
+  <div class="mx-auto max-w-6xl px-4 py-24 sm:px-6">
+    <Titulo id="experiencia-titulo" eyebrow="Experiência" titulo={experiencia.titulo} texto={experiencia.texto} />
+
+    <div class="mt-14 grid gap-14 lg:grid-cols-[1.1fr_1fr] lg:items-center">
+      <ul class="divide-y divide-navy-950/10 border-y border-navy-950/10">
+        {
+          experiencia.aprendizados.map((aprendizado) => (
+            <li class="flex gap-3 py-4 leading-relaxed text-navy-950">
+              <svg class="mt-1 size-4 shrink-0 text-ouro-600" viewBox="0 0 16 16" aria-hidden="true">
+                <path d="M3 8.5 6.5 12 13 4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              {aprendizado}
+            </li>
+          ))
+        }
+      </ul>
+
+      <figure class="border-l-2 border-ouro-600 pl-8">
+        <blockquote class="font-serif text-3xl leading-snug text-navy-950 italic">“{experiencia.citacao.texto}”</blockquote>
+        <figcaption class="eyebrow mt-5 text-ouro-800">{experiencia.citacao.autor}</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
