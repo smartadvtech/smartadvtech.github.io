@@ -44,7 +44,7 @@ jobs:
       id-token: write
     steps:
       - name: Checkout do repositório
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 1
 
