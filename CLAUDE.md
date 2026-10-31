@@ -51,7 +51,8 @@ O site institucional e comercial da SmartADV (`smartadvtech.com.br`), em Astro, 
 - **Animação:** sem fade de opacidade em texto. O Lighthouse mede o contraste no meio da animação e reprova; esconda com
   `visibility` até a vez do elemento e respeite o `prefers-reduced-motion`.
 - **Vídeo:** hospedado no `public/`, num `<video>` com `preload="none"`, nunca um player de terceiros (YouTube,
-  Instagram), que carregaria antes do consentimento.
+  Instagram), que carregaria antes do consentimento. A transcrição fica embaixo e muda junto com o vídeo: ele não tem
+  som, e ela é a alternativa em texto para quem não o vê (WCAG 2.2, critério 1.2.1).
 
 ## Armadilhas deste repositório
 

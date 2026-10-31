@@ -102,13 +102,132 @@ export const comoFunciona = [
   },
 ];
 
+// Um trecho da transcrição do vídeo: o texto que aparece na tela ou uma mensagem da conversa, com quem a mandou
+type Trecho = string | { de: 'Cliente' | 'Escritório'; texto: string };
+
+export interface Video {
+  src: string;
+  poster: string;
+  largura: number;
+  altura: number;
+  /** O texto do vídeo, cena a cena: o vídeo não tem som, e a transcrição é a alternativa em texto a ele */
+  transcricao: Trecho[][];
+}
+
+const SAUDACAO =
+  '🤖 Olá! Seja bem vindo(a) ao canal de atendimento do Molina&Molina Advogados via WhatsApp.\n\n' +
+  'Como podemos te ajudar?';
+
+const ANDAMENTOS = [
+  'Andamento(s) localizado(s):',
+  '',
+  'Processo: 0001234-87.2025.8.26.0100',
+  'Envolvidos: MARIANA ALVES PEREIRA, VERTICE TELECOMUNICACOES S.A.',
+  'Situação:',
+  '',
+  'Processo: 0004521-63.2022.8.26.0100',
+  'Envolvidos: MARIANA ALVES PEREIRA, PEDRA BRANCA ENGENHARIA E CONSTRUCAO LTDA, RICARDO MENDES SILVA',
+  'Situação: Foi realizado acordo.',
+  'Serão descontados os honorários de 30% da parcela.',
+  'Parcela única - R$ 23 - yy/zz/www.',
+  'O pagamento será realizado no dia útil seguinte ao vencimento,',
+  '',
+  'Já conhece nossas redes?',
+  'instagram.com/molinaemolinaadvogados/',
+  'https://www.facebook.com/molinaemolinaadvogadostrabalhistas/',
+  '',
+  'Processo: 0010388-41.2024.5.02.0081',
+  'Envolvidos: REDEVALE TELECOMUNICACOES S.A E OUTROS, MARIANA ALVES PEREIRA',
+  'Situação do Processo:',
+  'Em1a instância, o juiz reconheceu que você deveria receber horas extras (desconsiderando o cargo de confiança e ' +
+    'condenou a empresa ao pagamento de adicional de horas extras.',
+  '',
+  'Em 2ª instância, o Tribunal manteve a condenação.',
+  '',
+  'O que acontece depois?',
+  'Vamos aguardar a fase de execução de sentença, em que discutiremos o valor da condenação.',
+  'Nessa fase que apresentaremos os cálculos, a empresa os dela, haverá discussões quanto aos valores até que o juiz ' +
+    'determine o valor final da condenação, intime a empresa para efetuar o pagamento e liberação de valores.',
+  'Não há prazo definido, é preciso aguardar.',
+].join('\n');
+
+const RESPOSTA_DA_IA = [
+  'Em regra, não é possível remarcar a audiência trabalhista, pois a data é definida pelo juiz com base na agenda do ' +
+    'fórum e deve ser cumprida, sem interferência do advogado.',
+  'Só é permitido pedir a remarcação em casos de força maior, como por exemplo parto previsto para a data ou uma ' +
+    'cirurgia agendada, atestado médico ou de óbito — e sempre é necessário apresentar documentos que comprovem esse ' +
+    'motivo. Mesmo nesses casos, a decisão final é do juiz e não há garantias de que será aceita.',
+  'Se houver um motivo grave, nos avise o quanto antes e envie a documentação necessária para tentarmos pedir a ' +
+    'remarcação ao Juiz do processo.',
+  '',
+  'Podemos ajudar em algo mais?',
+].join('\n');
+
 // O vídeo da campanha, que chega pronto, com os nomes e os números de processo fictícios: trocar é substituir os
-// arquivos em public/videos/. null esconde a seção.
-export const video: { src: string; poster: string; largura: number; altura: number } | null = {
+// arquivos em public/videos/ e a transcrição, que repete o texto de cada cena e as mensagens, sem a formatação do
+// WhatsApp. null esconde a seção.
+export const video: Video | null = {
   src: '/videos/atendimento.mp4',
   poster: '/videos/atendimento-poster.jpg',
   largura: 720,
   altura: 1280,
+  transcricao: [
+    [
+      'Sábado, 16h57. Seu cliente quer saber do processo.',
+      'Na tela de bloqueio do celular, chegam as mensagens: "Dr., alguma novidade do meu processo?" e "E a ' +
+        'audiência, já tem data?", da Dona Maria; "Bom dia! Saiu alguma coisa?", do Sr. Carlos; e "Oi?? Alguém pode ' +
+        'me responder?", da Juliana.',
+    ],
+    ['E quem responde é você. No seu WhatsApp pessoal. No fim de semana. Nas férias.'],
+    ['E se o WhatsApp do escritório respondesse por você?'],
+    [
+      'Uma consulta no WhatsApp do escritório, numa tela recriada com as mensagens reais. Os nomes e os números de ' +
+        'processo são fictícios, e a pergunta à IA e a resposta são de outra conversa real.',
+      'O cliente chama no WhatsApp do escritório.',
+      { de: 'Cliente', texto: 'Oi' },
+      { de: 'Escritório', texto: SAUDACAO },
+      'Escolhe o que quer saber: toca em "Opções", vê a lista (Novo cliente, Consultar data audiência, Consultar meu ' +
+        'processo, Consultar data perícia, Sou advogado ou perito e Outros) e escolhe "Consultar meu processo".',
+      { de: 'Cliente', texto: 'Consultar meu processo' },
+      'O assistente consulta o sistema do escritório.',
+      {
+        de: 'Escritório',
+        texto:
+          'Ok, entendemos sua solicitação.\nPor favor, aguarde um momento enquanto consultamos seu processo.\n\n' +
+          'ATENÇÃO:\nAs consultas em sites da internet como JUSBRASIL e GOOGLE não são fontes oficiais da JUSTIÇA DO ' +
+          'TRABALHO.',
+      },
+      'O escritório aparece "digitando…". No vídeo, a espera foi acelerada.',
+      'E responde com o andamento de cada processo, em linguagem simples, sem ocupar a equipe.',
+      { de: 'Escritório', texto: ANDAMENTOS },
+      'E a dúvida fora do menu?',
+      { de: 'Escritório', texto: 'Podemos ajudar em algo mais?' },
+      'Com os botões "Não" e "Menu Principal", o cliente toca em "Menu Principal".',
+      { de: 'Cliente', texto: 'Menu Principal' },
+      { de: 'Escritório', texto: SAUDACAO },
+      'O cliente toca em "Opções" e escolhe "Outros".',
+      { de: 'Cliente', texto: 'Outros' },
+      { de: 'Escritório', texto: 'Por favor, digite sua dúvida.' },
+      {
+        de: 'Cliente',
+        texto: 'eu preciso faltar na minha audiência, é aniversário da minha mãe, dá pra mudar a data?',
+      },
+      'A IA responde, com a base de respostas do escritório.',
+      { de: 'Escritório', texto: RESPOSTA_DA_IA },
+      'Na dúvida, passa para a equipe.',
+    ],
+    [
+      'Por trás disso, a SmartADV deixa o atendimento do escritório pronto: o WhatsApp do escritório numa ' +
+        'plataforma para a equipe; triagem automática por assunto; consulta de andamento, audiência e perícia; ' +
+        'equipe treinada e fluxo documentado; IA para as outras dúvidas, se o escritório quiser; e o que o ' +
+        'assistente não resolve vai para uma pessoa.',
+    ],
+    [
+      'Num escritório trabalhista atendido pela SmartADV, 3 em 4 consultas são respondidas na hora, sem passar pela ' +
+        'equipe, e 1 em 4 chega fora do horário comercial. Andamento, audiência e perícia, em outubro de 2026.',
+    ],
+    ['Atendimento no WhatsApp, pronto em até 30 dias. Diagnóstico gratuito: smartadvtech.com.br/atendimento.'],
+  ],
 };
 
 export const demonstracao = {
