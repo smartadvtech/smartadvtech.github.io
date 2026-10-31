@@ -7,7 +7,8 @@ site, o favicon e a imagem de compartilhamento. O desenho não muda: só é reco
   pixel vira a cor F com o alfa a tal que a·F + (1-a)·navy é o pixel original: sobre o navy da página (#021033), o
   desenho e a sombra dele ficam iguais ao JPEG, sem o ruído de compressão do fundo, que revelaria o retângulo do
   recorte. Só servem sobre esse navy.
-- public/: os favicons e o og.png, com o fundo navy opaco.
+- public/: os favicons e o og.jpg, com o fundo navy opaco. O og.jpg é JPEG, como o original: em PNG, ele passava de
+  240 KB, perto dos 300 KB acima dos quais o WhatsApp mostra o link sem a imagem.
 
 Uso: python3 scripts/recortar-logo.py (precisa do Pillow). Quando houver o logo em vetor, ele substitui este script.
 """
@@ -41,7 +42,9 @@ def main():
                        (512, "icon-512.png")]:
         no_quadrado(simbolo, lado, 0.12).save(publico / nome)
     no_quadrado(simbolo, 48, 0.08).save(publico / "favicon.ico", sizes=[(16, 16), (32, 32), (48, 48)])
-    imagem_de_compartilhamento(logo.crop(RECORTES["logo-completo.png"])).save(publico / "og.png", optimize=True)
+    imagem_de_compartilhamento(logo.crop(RECORTES["logo-completo.png"])).save(
+        publico / "og.jpg", quality=85, optimize=True, progressive=True
+    )
 
 
 def sem_o_navy(recorte):

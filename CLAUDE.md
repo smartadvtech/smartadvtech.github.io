@@ -27,7 +27,7 @@ O site institucional e comercial da SmartADV (`smartadvtech.com.br`), em Astro, 
 | `src/pages/` | a página inicial, a do atendimento, a da consultoria, a política de privacidade, a 404 e o `robots.txt` |
 | `src/assets/` | os recortes do logo e as fotos da equipe |
 | `public/videos/` | o vídeo da página do atendimento e o pôster dele; o preview do link da página é o `public/og-atendimento.png` |
-| `scripts/recortar-logo.py` | gera os recortes, o favicon e o `og.png` a partir de `design/logo-original.jpeg` |
+| `scripts/recortar-logo.py` | gera os recortes, o favicon e o `og.jpg` a partir de `design/logo-original.jpeg` |
 
 ## Como trabalhar
 
