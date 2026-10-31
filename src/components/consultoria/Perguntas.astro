@@ -1,0 +1,31 @@
+---
+import Titulo from '../Titulo.astro';
+import { perguntas } from '../../data/consultoria';
+---
+
+<section class="mx-auto max-w-6xl px-4 py-24 sm:px-6" aria-labelledby="perguntas-titulo">
+  <Titulo id="perguntas-titulo" eyebrow="Dúvidas" titulo="Perguntas frequentes" />
+
+  <div class="mt-14 max-w-3xl divide-y divide-navy-950/10 border-y border-navy-950/10">
+    {
+      perguntas.map(({ pergunta, resposta, link }) => (
+        <details class="group">
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-5 font-semibold text-navy-950 hover:text-ouro-800 [&::-webkit-details-marker]:hidden">
+            {pergunta}
+            <svg class="size-5 shrink-0 text-ouro-600 transition-transform group-open:rotate-45" viewBox="0 0 20 20" aria-hidden="true">
+              <path d="M10 4v12M4 10h12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+            </svg>
+          </summary>
+          <p class="pb-6 leading-relaxed text-tinta-suave">
+            {resposta}
+            {link && (
+              <a href={link.href} class="mt-3 block font-semibold text-ouro-800 hover:text-ouro-600">
+                {link.texto}
+              </a>
+            )}
+          </p>
+        </details>
+      ))
+    }
+  </div>
+</section>

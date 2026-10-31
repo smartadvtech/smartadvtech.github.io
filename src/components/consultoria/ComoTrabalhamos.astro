@@ -1,0 +1,60 @@
+---
+// Do diagnóstico à entrada em operação, numa sequência só, com o prazo, o suporte e o que pedimos do escritório
+import Titulo from '../Titulo.astro';
+import { comoTrabalhamos } from '../../data/consultoria';
+---
+
+<section id="como-funciona" class="border-t border-navy-950/10 bg-white" aria-labelledby="como-funciona-titulo">
+  <div class="mx-auto max-w-6xl px-4 py-24 sm:px-6">
+    <Titulo
+      id="como-funciona-titulo"
+      eyebrow="Como trabalhamos"
+      titulo="Primeiro entendemos o escritório, depois propomos"
+      texto="Nenhum escritório é igual. O plano sai de como o seu funciona hoje, e não de um pacote pronto."
+    />
+
+    <ol class="mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-5 lg:gap-6">
+      {
+        comoTrabalhamos.passos.map(({ titulo, texto }, i) => (
+          <li class="border-t border-ouro-600/60 pt-6">
+            <p class="font-serif text-4xl leading-none font-semibold text-ouro-800" aria-hidden="true">
+              {i + 1}
+            </p>
+            <h3 class="mt-4 font-semibold text-navy-950">{titulo}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-tinta-suave">{texto}</p>
+          </li>
+        ))
+      }
+    </ol>
+
+    <div class="mt-16 grid gap-px overflow-hidden rounded-sm border border-navy-950/10 bg-navy-950/10 lg:grid-cols-2">
+      <div class="bg-marfim p-8 sm:p-10">
+        <h3 class="font-serif text-2xl font-semibold text-navy-950">Prazo e suporte</h3>
+        <ul class="mt-6 space-y-3 leading-relaxed text-tinta">
+          {
+            comoTrabalhamos.prazoESuporte.map((item) => (
+              <li class="flex gap-3">
+                <span class="mt-2.5 h-px w-4 shrink-0 bg-ouro-600" aria-hidden="true" />
+                {item}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <div class="bg-marfim p-8 sm:p-10">
+        <h3 class="font-serif text-2xl font-semibold text-navy-950">O que pedimos do escritório</h3>
+        <ul class="mt-6 space-y-3 leading-relaxed text-tinta">
+          {
+            comoTrabalhamos.pedimos.itens.map((item) => (
+              <li class="flex gap-3">
+                <span class="mt-2.5 h-px w-4 shrink-0 bg-ouro-600" aria-hidden="true" />
+                {item}
+              </li>
+            ))
+          }
+        </ul>
+        <p class="mt-6 text-sm leading-relaxed text-tinta-suave">{comoTrabalhamos.pedimos.nota}</p>
+      </div>
+    </div>
+  </div>
+</section>

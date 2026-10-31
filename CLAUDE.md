@@ -21,9 +21,10 @@ O site institucional e comercial da SmartADV (`smartadvtech.com.br`), em Astro, 
 |---|---|
 | `src/data/site.ts` | os textos das seções da home |
 | `src/data/atendimento.ts` | os textos da página do atendimento no WhatsApp (`/atendimento`), a página da campanha |
+| `src/data/consultoria.ts` | os textos da página da consultoria (`/consultoria`), a campanha da organização do escritório |
 | `src/config.ts` | e-mail, WhatsApp, IDs dos parceiros de anúncio, dados da empresa e `indexar` |
-| `src/components/` | uma seção por componente; `Rastreamento` (consentimento e parceiros), `ConsentBanner` e `WhatsAppButton`. As seções só da página do atendimento ficam em `src/components/atendimento/` |
-| `src/pages/` | a página inicial, a do atendimento, a política de privacidade, a 404 e o `robots.txt` |
+| `src/components/` | uma seção por componente; `Rastreamento` (consentimento e parceiros), `ConsentBanner` e `WhatsAppButton`. As seções só da página do atendimento ficam em `src/components/atendimento/`, e as da consultoria, em `src/components/consultoria/` |
+| `src/pages/` | a página inicial, a do atendimento, a da consultoria, a política de privacidade, a 404 e o `robots.txt` |
 | `src/assets/` | os recortes do logo e as fotos da equipe |
 | `public/videos/` | o vídeo da página do atendimento e o pôster dele; o preview do link da página é o `public/og-atendimento.png` |
 | `scripts/recortar-logo.py` | gera os recortes, o favicon e o `og.png` a partir de `design/logo-original.jpeg` |

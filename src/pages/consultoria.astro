@@ -1,0 +1,52 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/consultoria/Hero.astro';
+import Sinais from '../components/consultoria/Sinais.astro';
+import AntesDepois from '../components/consultoria/AntesDepois.astro';
+import Plano from '../components/consultoria/Plano.astro';
+import ComoTrabalhamos from '../components/consultoria/ComoTrabalhamos.astro';
+import Experiencia from '../components/consultoria/Experiencia.astro';
+import Equipe from '../components/Equipe.astro';
+import Perguntas from '../components/consultoria/Perguntas.astro';
+import Contato from '../components/Contato.astro';
+import { config } from '../config';
+import { chamadaFinal, contato } from '../data/consultoria';
+
+const descricao =
+  'Consultoria para escritórios de advocacia: organizamos atendimento, prazos, papéis e captação de clientes, num ' +
+  'plano em fases implantado com a equipe. Diagnóstico gratuito.';
+
+// Sem oferta com preço: o investimento de cada fase é orçado no plano
+const servico = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Consultoria em gestão para escritórios de advocacia',
+  serviceType: 'Consultoria em gestão jurídica',
+  description: descricao,
+  url: new URL('/consultoria', config.url).href,
+  areaServed: { '@type': 'Country', name: 'Brasil' },
+  audience: { '@type': 'BusinessAudience', audienceType: 'Escritórios de advocacia' },
+  provider: { '@type': 'Organization', name: config.nome, url: config.url },
+};
+---
+
+{/* Sem imagem de compartilhamento própria: o preview do link é o do site, com o logo (decisão de quem conduz a
+    campanha) */}
+<Base
+  titulo="Consultoria em gestão para escritórios de advocacia · SmartADV"
+  descricao={descricao}
+  cabecalhoSimples
+  contato={contato}
+>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(servico)} />
+
+  <Hero />
+  <Sinais />
+  <AntesDepois />
+  <Plano />
+  <ComoTrabalhamos />
+  <Experiencia />
+  <Equipe />
+  <Perguntas />
+  <Contato titulo={chamadaFinal.titulo} texto={chamadaFinal.texto} contato={contato} />
+</Base>
