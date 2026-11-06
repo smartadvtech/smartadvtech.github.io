@@ -3,13 +3,14 @@
 O site institucional e comercial da SmartADV (`smartadvtech.com.br`), em Astro, publicado pelo GitHub Pages. O
 `README.md` diz onde mudar cada coisa e como o domínio aponta para o Pages.
 
-@../smartadv/ARQUITETURA.md
 @../smartadv/CONVENCOES.md
-@../smartadv/ARMADILHAS.md
 
 ## Onde este repositório se encaixa
 
 - **Não depende dos outros repositórios** e não toca na AWS: é só conteúdo estático.
+- **Do contexto central, só as `CONVENCOES.md` entram em toda sessão:** o resto é dos outros componentes. Quando a
+  mudança tocar o domínio ou o workflow da revisão de PR, leia o `ARQUITETURA.md` e o `ARMADILHAS.md` em
+  `../smartadv`.
 - **O domínio é o mesmo dos webhooks e do e-mail.** O site usa o domínio raiz e o `www`. O `webhooks.` é da API do
   chatbot (`smartadv-infra`), e o MX, o SPF e o DKIM são do e-mail.
 - **O contato vira lead no WhatsApp:** o número em `src/config.ts` é o do atendimento comercial da SmartADV, não o de
