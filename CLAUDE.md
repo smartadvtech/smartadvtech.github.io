@@ -5,6 +5,11 @@ O site institucional e comercial da SmartADV (`smartadvtech.com.br`), em Astro, 
 
 @../smartadv/CONVENCOES.md
 
+**Se o conteúdo deste arquivo não estiver no seu contexto** (o título "Convenções da SmartADV"), mas só esta linha
+com `@`, o import não carregou. Leia-o inteiro em `../smartadv`, mesmo que a tarefa pareça não precisar dele, e comece
+a resposta seguinte com "**O contexto central não carregou pelo import**" e o motivo provável (o `ARMADILHAS.md` do
+`smartadv`, "Claude Code"). A revisão de PR no GitHub Actions roda sem o contexto central, de propósito, e não avisa.
+
 ## Onde este repositório se encaixa
 
 - **Não depende dos outros repositórios** e não toca na AWS: é só conteúdo estático.
