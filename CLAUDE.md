@@ -10,7 +10,7 @@ O site institucional e comercial da SmartADV (`smartadvtech.com.br`), em Astro, 
 - **Não depende dos outros repositórios** e não toca na AWS: é só conteúdo estático.
 - **Do contexto central, só as `CONVENCOES.md` entram em toda sessão:** o resto é dos outros componentes. Quando a
   mudança tocar o domínio ou o workflow da revisão de PR, leia o `ARQUITETURA.md` e o `ARMADILHAS.md` em
-  `../smartadv`.
+  `../smartadv`, se ele estiver na máquina.
 - **O domínio é o mesmo dos webhooks e do e-mail.** O site usa o domínio raiz e o `www`. O `webhooks.` é da API do
   chatbot (`smartadv-infra`), e o MX, o SPF e o DKIM são do e-mail.
 - **O contato vira lead no WhatsApp:** o número em `src/config.ts` é o do atendimento comercial da SmartADV, não o de
