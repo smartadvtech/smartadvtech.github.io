@@ -18,7 +18,7 @@ export const config = {
   },
 
   contato: {
-    email: 'smartadv@smartadvtech.com.br',
+    email: 'contato@smartadvtech.com.br',
   },
 
   // Só dígitos, com o 55 e o DDD (por exemplo, 5511999999999). Vazio: sem botão, e o contato vai pelo e-mail.
