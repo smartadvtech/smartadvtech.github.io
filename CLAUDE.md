@@ -51,10 +51,17 @@ a resposta seguinte com "**O contexto central não carregou pelo import**" e o m
 - **Texto novo:** em português, no tom do resto do site, e só o que a SmartADV entrega hoje. A IA das perguntas fora
   do menu aparece só na página do atendimento, e sempre como adicional: fora dos planos e ligada só com a autorização
   do escritório.
-- **Página de campanha** (como a `/atendimento`): `cabecalhoSimples` no `Base` (só o logo e o botão, sem o menu que leva
-  para fora dela), a imagem de preview própria (`imagem`) e o `contato` da página: a mensagem, o assunto e o
-  `rastrear`, o método do evento de lead, para o lead chegar dizendo de onde veio. Todo botão de contato usa esse
-  mesmo `contato`.
+- **Página de campanha** (como a `/atendimento`): `campanha` no `Base`, a imagem de preview própria (`imagem`) e o
+  `contato` da página.
+  - **O cabeçalho depende de onde a pessoa veio:** quem chega de fora (o anúncio, o Instagram, a URL digitada) vê só o
+    logo e o botão, sem o menu que leva para fora da página; quem chega navegando pelo site vê o menu, que não some no
+    meio da navegação. Quem decide é um script no `<head>`, pelo `document.referrer`, antes da primeira pintura, e sem
+    ele vale o cabeçalho de quem veio de fora. Na prévia, abrir a URL direto mostra o primeiro, e chegar pelo menu da
+    home, o segundo: as capturas são dos dois.
+  - **O `contato` é a mensagem, o assunto e o `rastrear`,** o rótulo do evento de lead (a página onde a pessoa clicou),
+    para o lead chegar dizendo de onde veio. Todo botão de contato usa esse mesmo `contato`: os dois cabeçalhos e o
+    botão flutuante do WhatsApp também. A origem da visita (o anúncio, a UTM) não é do rótulo: o Google e a Meta a
+    guardam.
 - **Animação:** sem fade de opacidade em texto. O Lighthouse mede o contraste no meio da animação e reprova; esconda com
   `visibility` até a vez do elemento e respeite o `prefers-reduced-motion`.
 - **Vídeo:** hospedado no `public/`, num `<video>` com `preload="none"`, nunca um player de terceiros (YouTube,
