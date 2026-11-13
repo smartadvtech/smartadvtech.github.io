@@ -1,14 +1,15 @@
 ---
 // O botão flutuante do WhatsApp. Só aparece com o número em src/config.ts. Fica num <aside>, fora do <main>: assim ele
 // está numa região da página, e quem navega pelas regiões com um leitor de tela chega a ele.
-import { linkDoWhatsApp } from '../lib/contato';
+import { linkDoWhatsApp, type Contato } from '../lib/contato';
 
 interface Props {
-  /** A mensagem pronta da página; sem ela, a do site */
-  mensagem?: string;
+  /** O contato da página (a mensagem pronta e o rótulo do lead); sem ele, os do site */
+  contato?: Contato;
 }
 
-const link = linkDoWhatsApp(Astro.props.mensagem);
+const { contato } = Astro.props;
+const link = linkDoWhatsApp(contato?.mensagem);
 ---
 
 {
@@ -18,7 +19,7 @@ const link = linkDoWhatsApp(Astro.props.mensagem);
         href={link}
         target="_blank"
         rel="noopener"
-        data-rastrear="whatsapp"
+        data-rastrear={contato?.rastrear ?? 'contato'}
         aria-label="Conversar com a SmartADV pelo WhatsApp"
         class="fixed right-5 bottom-5 z-30 flex size-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg ring-4 ring-navy-950/10 transition-transform hover:scale-105"
       >

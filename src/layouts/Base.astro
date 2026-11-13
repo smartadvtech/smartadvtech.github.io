@@ -17,13 +17,16 @@ interface Props {
   descricao: string;
   /** A imagem do preview do link, em public/ (1200x630). Sem ela, a do site. */
   imagem?: string;
-  /** A página de uma campanha: o cabeçalho só com o logo e o botão de contato, sem o menu que leva para fora dela. */
-  cabecalhoSimples?: boolean;
-  /** A mensagem e o assunto do primeiro contato nesta página (cabeçalho e botão do WhatsApp) */
+  /**
+   * A página de uma campanha: quem chega de fora (o anúncio, o Instagram, a URL digitada) vê o cabeçalho só com o logo e
+   * o botão de contato, sem o menu que leva para fora dela. Quem chega navegando pelo site vê o menu, como nas outras.
+   */
+  campanha?: boolean;
+  /** A mensagem, o assunto e o rótulo do lead do primeiro contato nesta página (o cabeçalho e o botão do WhatsApp) */
   contato?: Contato;
 }
 
-const { titulo, descricao, imagem: imagemDaPagina = '/og.jpg', cabecalhoSimples = false, contato } = Astro.props;
+const { titulo, descricao, imagem: imagemDaPagina = '/og.jpg', campanha = false, contato } = Astro.props;
 const canonical = new URL(Astro.url.pathname, config.url).href;
 const imagem = new URL(imagemDaPagina, config.url).href;
 const { razaoSocial, cnpj } = config.empresa;
@@ -69,6 +72,19 @@ const organizacao = {
     <link rel="preload" href={fonteDoTitulo} as="font" type="font/woff2" crossorigin />
     <link rel="preload" href={fonteDoTexto} as="font" type="font/woff2" crossorigin />
 
+    {
+      campanha && (
+        <script is:inline>
+          // Antes da primeira pintura, para o cabeçalho não trocar na frente da pessoa. Sem a origem (o navegador que não
+          // a manda, o JavaScript desligado), fica o cabeçalho de quem chegou de fora.
+          try {
+            if (document.referrer && new URL(document.referrer).origin === location.origin) {
+              document.documentElement.setAttribute('data-veio-do-site', '');
+            }
+          } catch (e) {}
+        </script>
+      )
+    }
     <script type="application/ld+json" set:html={JSON.stringify(organizacao)} />
     <slot name="head" />
     {temRastreamento && <Rastreamento />}
@@ -77,12 +93,12 @@ const organizacao = {
     <a href="#conteudo" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 botao-ouro">
       Pular para o conteúdo
     </a>
-    <Header simples={cabecalhoSimples} contato={contato} />
+    <Header campanha={campanha} contato={contato} />
     <main id="conteudo">
       <slot />
     </main>
     <Footer />
-    <WhatsAppButton mensagem={contato?.mensagem} />
+    <WhatsAppButton contato={contato} />
     {temRastreamento && <ConsentBanner />}
   </body>
 </html>

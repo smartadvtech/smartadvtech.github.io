@@ -74,3 +74,13 @@
 @utility filete {
   @apply inline-block h-px w-12 bg-linear-to-r from-ouro-300 to-ouro-600;
 }
+
+/*
+ * O cabeçalho da página de campanha: o menu só para quem chegou navegando pelo site, e o botão sozinho para quem chegou
+ * de fora (o data-veio-do-site, do script no <head> do Base). Fora de camada, de propósito: vence o lg:flex e o
+ * lg:hidden do menu, que estão na camada das utilities.
+ */
+html:not([data-veio-do-site]) [data-so-pelo-site],
+html[data-veio-do-site] [data-so-de-fora] {
+  display: none;
+}
