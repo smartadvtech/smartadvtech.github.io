@@ -115,7 +115,7 @@ export interface Video {
 }
 
 const SAUDACAO =
-  '🤖 Olá! Seja bem vindo(a) ao canal de atendimento do Molina&Molina Advogados via WhatsApp.\n\n' +
+  '🤖 Olá! Seja bem vindo(a) ao canal de atendimento do Fulanos Advogados via WhatsApp.\n\n' +
   'Como podemos te ajudar?';
 
 const ANDAMENTOS = [
@@ -133,8 +133,8 @@ const ANDAMENTOS = [
   'O pagamento será realizado no dia útil seguinte ao vencimento,',
   '',
   'Já conhece nossas redes?',
-  'instagram.com/molinaemolinaadvogados/',
-  'https://www.facebook.com/molinaemolinaadvogadostrabalhistas/',
+  'instagram.com/fulanosadvogados/',
+  'https://www.facebook.com/fulanosadvogados/',
   '',
   'Processo: 0010388-41.2024.5.02.0081',
   'Envolvidos: REDEVALE TELECOMUNICACOES S.A E OUTROS, MARIANA ALVES PEREIRA',
@@ -163,9 +163,9 @@ const RESPOSTA_DA_IA = [
   'Podemos ajudar em algo mais?',
 ].join('\n');
 
-// O vídeo da campanha, que chega pronto, com os nomes e os números de processo fictícios: trocar é substituir os
-// arquivos em public/videos/ e a transcrição, que repete o texto de cada cena e as mensagens, sem a formatação do
-// WhatsApp. null esconde a seção.
+// O vídeo da campanha, que chega pronto, com o escritório, os nomes e os números de processo fictícios: trocar é
+// substituir os arquivos em public/videos/ e a transcrição, que repete o texto de cada cena e as mensagens, sem a
+// formatação do WhatsApp. null esconde a seção.
 export const video: Video | null = {
   src: '/videos/atendimento.mp4',
   poster: '/videos/atendimento-poster.jpg',
