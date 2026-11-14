@@ -1,7 +1,8 @@
 /**
  * Os textos da página do atendimento no WhatsApp (/atendimento), a página da campanha. Só o que a SmartADV entrega
- * hoje, sem o nome das ferramentas. A IA das perguntas fora do menu aparece sempre como adicional: fica fora dos
- * planos e só é ligada com a autorização do escritório.
+ * hoje, sem o nome das ferramentas. A IA das perguntas fora do menu e os avisos ao cliente aparecem sempre como
+ * adicionais: ficam fora dos planos e só são ligados com a autorização do escritório. Os avisos têm a página deles
+ * (/avisos, em src/data/avisos.ts), e aqui fica só a chamada para ela.
  */
 import type { Resultados } from './site';
 
@@ -254,6 +255,16 @@ export const ia = [
   },
 ];
 
+// A seção do adicional dos avisos ao cliente. Os três avisos vêm de src/data/avisos.ts, os mesmos da página deles
+export const avisos = {
+  titulo: 'O escritório avisa antes de o cliente perguntar',
+  texto:
+    'Com os avisos ao cliente, as notícias do processo chegam pelo WhatsApp oficial do escritório, sem o cliente ' +
+    'precisar perguntar. E o cliente bem informado fica menos exposto ao golpe do falso advogado.',
+  nota: 'É um adicional, orçado no diagnóstico e ligado só com a autorização do escritório.',
+  link: { href: '/avisos', texto: 'Conheça os avisos ao cliente e o golpe do falso advogado →' },
+};
+
 export const entregas = [
   {
     titulo: 'Plataforma de atendimento',
@@ -353,8 +364,8 @@ export const planos = {
     'Sem cobrança por consulta',
   ],
   adicional:
-    'A IA para as perguntas fora do menu é um adicional, orçado no diagnóstico e ligado só com a autorização do ' +
-    'escritório.',
+    'A IA para as perguntas fora do menu e os avisos ao cliente são adicionais, orçados no diagnóstico e ligados só ' +
+    'com a autorização do escritório.',
   consulta:
     'Consulta é cada pedido de andamento, audiência ou perícia que um cliente faz ao assistente. No diagnóstico, ' +
     'estimamos o plano pelo volume de clientes do escritório.',
@@ -377,6 +388,14 @@ export const perguntas = [
       'Ela passa a conversa para uma pessoa da equipe. A IA responde a partir da base de respostas, e o que não está ' +
       'nela, ou deixa dúvida, vai para a equipe. A equipe vê todas as conversas na plataforma de atendimento, e a ' +
       'base é ajustada sempre que o escritório pedir.',
+  },
+  {
+    pergunta: 'O escritório pode avisar o cliente antes de ele perguntar?',
+    resposta:
+      'Pode, com o adicional de avisos ao cliente: o aviso de uma resposta nova no processo, os lembretes da audiência ' +
+      'e da perícia e o aviso de que o processo segue sem novidade, todos pelo WhatsApp oficial do escritório. É um ' +
+      'adicional, orçado no diagnóstico.',
+    link: { href: '/avisos', texto: 'Conheça os avisos ao cliente →' },
   },
   {
     pergunta: 'Preciso trocar de número?',
@@ -426,8 +445,8 @@ export const perguntas = [
     resposta:
       'A mensalidade do atendimento automático vai de R$ 69,90 (até 200 consultas por mês) a R$ 290 (até 3.000), em ' +
       'quatro planos. A implantação é orçada no diagnóstico, conforme o tamanho do escritório. A plataforma de ' +
-      'atendimento e o sistema de gestão são pagos direto aos fornecedores. A IA para as perguntas fora do menu é um ' +
-      'adicional, orçado à parte.',
+      'atendimento e o sistema de gestão são pagos direto aos fornecedores. A IA para as perguntas fora do menu e os ' +
+      'avisos ao cliente são adicionais, orçados à parte.',
   },
 ];
 

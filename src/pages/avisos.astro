@@ -1,0 +1,49 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/avisos/Hero.astro';
+import Golpe from '../components/avisos/Golpe.astro';
+import Avisos from '../components/avisos/Avisos.astro';
+import AntesDepois from '../components/avisos/AntesDepois.astro';
+import ComoFunciona from '../components/avisos/ComoFunciona.astro';
+import Regras from '../components/avisos/Regras.astro';
+import Perguntas from '../components/avisos/Perguntas.astro';
+import Contato from '../components/Contato.astro';
+import { config } from '../config';
+import { chamadaFinal, contato } from '../data/avisos';
+
+const descricao =
+  'O escritório avisa o cliente pelo WhatsApp oficial: resposta nova no processo, audiência, perícia e até quando não ' +
+  'há novidade. Menos espaço para o golpe do falso advogado.';
+
+// Sem as ofertas: os avisos são um adicional, orçado no diagnóstico, sem preço público
+const servico = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Avisos ao cliente no WhatsApp para escritórios de advocacia',
+  serviceType: 'Avisos ao cliente no WhatsApp',
+  description: descricao,
+  url: new URL('/avisos', config.url).href,
+  areaServed: { '@type': 'Country', name: 'Brasil' },
+  audience: { '@type': 'BusinessAudience', audienceType: 'Escritórios de advocacia' },
+  provider: { '@type': 'Organization', name: config.nome, url: config.url },
+};
+---
+
+<Base
+  titulo="Golpe do falso advogado: avisos ao cliente no WhatsApp · SmartADV"
+  descricao={descricao}
+  imagem="/og-avisos.png"
+  campanha
+  contato={contato}
+>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(servico)} />
+
+  <Hero />
+  <Golpe />
+  <Avisos />
+  <AntesDepois />
+  <ComoFunciona />
+  <Regras />
+  <Perguntas />
+  <Contato titulo={chamadaFinal.titulo} texto={chamadaFinal.texto} contato={contato} />
+</Base>

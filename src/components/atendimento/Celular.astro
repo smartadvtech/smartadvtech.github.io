@@ -1,7 +1,15 @@
 ---
-// Um celular com a conversa de uma consulta pelo WhatsApp, em HTML: leve, nítido em qualquer tela e legível por leitor
-// de tela. É uma ilustração, com dados fictícios; a consulta real está no vídeo da página.
-import { conversa } from '../../data/atendimento';
+// Um celular com uma conversa pelo WhatsApp, em HTML: leve, nítido em qualquer tela e legível por leitor de tela. É uma
+// ilustração, com dados fictícios. Sem a conversa, é a da consulta do hero do atendimento; a consulta real está no
+// vídeo da página.
+import { conversa as consulta } from '../../data/atendimento';
+import type { Mensagem } from '../../lib/conversa';
+
+interface Props {
+  conversa?: readonly Mensagem[];
+}
+
+const { conversa = consulta } = Astro.props;
 ---
 
 <figure class="mx-auto w-full max-w-xs">
@@ -18,26 +26,56 @@ import { conversa } from '../../data/atendimento';
 
     <ol class="flex min-h-[26rem] flex-col gap-2 px-3 py-4 text-left text-[13px] leading-snug text-[#111b21]">
       {
-        conversa.map(({ de, texto }, i) =>
-          de === 'opcoes' ? (
-            <li class="mensagem w-[80%] overflow-hidden rounded-lg bg-white shadow-sm" style={`--i: ${i}`}>
-              {texto.map((opcao) => (
-                <p class="border-t border-[#e9edef] px-3 py-2 text-center font-medium text-[#008069] first:border-t-0">{opcao}</p>
-              ))}
-            </li>
-          ) : (
+        conversa.map((mensagem, i) => {
+          if (mensagem.de === 'dia') {
+            return (
+              <li class="mensagem self-center rounded-md bg-white/90 px-2.5 py-1 text-[11px] text-[#54656f] shadow-sm" style={`--i: ${i}`}>
+                {mensagem.texto}
+              </li>
+            );
+          }
+          if (mensagem.de === 'opcoes') {
+            return (
+              <li class="mensagem w-[80%] overflow-hidden rounded-lg bg-white shadow-sm" style={`--i: ${i}`}>
+                {mensagem.texto.map((opcao) => (
+                  <p class="border-t border-[#e9edef] px-3 py-2 text-center font-medium text-[#008069] first:border-t-0">{opcao}</p>
+                ))}
+              </li>
+            );
+          }
+          if (mensagem.de === 'aviso') {
+            return (
+              <li class="mensagem w-[85%] overflow-hidden rounded-lg bg-white shadow-sm" style={`--i: ${i}`}>
+                <div class="px-3 py-2 whitespace-pre-line">
+                  <span class="sr-only">Aviso do escritório: </span>
+                  {mensagem.titulo && <p class="mb-1 font-semibold">{mensagem.titulo}</p>}
+                  {mensagem.texto}
+                </div>
+                {mensagem.botao && (
+                  <p class="flex items-center justify-center gap-1.5 border-t border-[#e9edef] px-3 py-2 font-medium text-[#008069]">
+                    <svg class="size-3.5" viewBox="0 0 16 16" aria-hidden="true">
+                      <path d="M6.5 3.5 2 8l4.5 4.5M2.5 8H10a4 4 0 0 1 4 4v1" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    <span class="sr-only">Botão: </span>
+                    {mensagem.botao}
+                  </p>
+                )}
+              </li>
+            );
+          }
+          return (
             <li
               class:list={[
                 'mensagem max-w-[80%] rounded-lg px-3 py-2 whitespace-pre-line shadow-sm',
-                de === 'cliente' ? 'self-end bg-[#d9fdd3]' : 'bg-white',
+                mensagem.de === 'cliente' ? 'self-end bg-[#d9fdd3]' : 'bg-white',
               ]}
               style={`--i: ${i}`}
             >
-              <span class="sr-only">{de === 'cliente' ? 'Cliente: ' : 'Escritório: '}</span>
-              {texto}
+              <span class="sr-only">{mensagem.de === 'cliente' ? 'Cliente: ' : 'Escritório: '}</span>
+              {mensagem.texto}
             </li>
-          ),
-        )
+          );
+        })
       }
     </ol>
   </div>
