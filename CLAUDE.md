@@ -50,9 +50,10 @@ a resposta seguinte com "**O contexto central não carregou pelo import**" e o m
 - **Conferência:** Lighthouse com acessibilidade, boas práticas e SEO em 100, no site publicado. Na prévia local, o
   canonical aponta para o domínio.
 - **Texto novo:** em português, no tom do resto do site, e só o que os sócios decidiram anunciar, pelo contexto do
-  produto, que eles mantêm. A IA das perguntas fora do menu aparece só na página do atendimento, e sempre como adicional: fora dos planos e ligada só com a autorização do escritório. Os
-  avisos ao cliente também são um adicional do atendimento, orçado no diagnóstico, e o golpe do falso advogado aparece
-  sem a promessa de que os avisos o impedem: eles acostumam o cliente ao canal oficial do escritório.
+  produto, que eles mantêm. A IA das perguntas fora do menu aparece só na página do atendimento, e sempre como
+  adicional: fora dos planos e ligada só com a autorização do escritório. Os avisos ao cliente também são um adicional
+  do atendimento, orçado no diagnóstico, e o golpe do falso advogado aparece sem a promessa de que os avisos o impedem:
+  eles acostumam o cliente ao canal oficial do escritório.
 - **Página de campanha** (como a `/atendimento`): `campanha` no `Base`, a imagem de preview própria (`imagem`) e o
   `contato` da página.
   - **O cabeçalho depende de onde a pessoa veio:** quem chega de fora (o anúncio, o Instagram, a URL digitada) vê só o
