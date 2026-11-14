@@ -23,7 +23,8 @@ export const hero = {
   detalhe: 'Um adicional do atendimento no WhatsApp · orçado no diagnóstico gratuito',
 };
 
-// A conversa do celular do hero: os três avisos, em dias diferentes. Ilustração, com dados fictícios
+// A conversa do celular do hero: os três avisos, em dias diferentes. Ilustração, com dados fictícios: os números de
+// processo são os do vídeo do atendimento, com o dígito verificador do CNJ errado de propósito, e não existem
 export const conversa: readonly Mensagem[] = [
   { de: 'dia', texto: '10 de outubro' },
   {

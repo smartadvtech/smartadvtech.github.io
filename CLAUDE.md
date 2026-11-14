@@ -49,9 +49,8 @@ a resposta seguinte com "**O contexto central não carregou pelo import**" e o m
   - listas e cartões de texto ficam à esquerda em qualquer largura.
 - **Conferência:** Lighthouse com acessibilidade, boas práticas e SEO em 100, no site publicado. Na prévia local, o
   canonical aponta para o domínio.
-- **Texto novo:** em português, no tom do resto do site, e só o que os sócios decidiram anunciar: o estado de cada
-  função está no contexto do produto (o plugin `smartadv-contexto`). A IA das perguntas fora do menu aparece só na
-  página do atendimento, e sempre como adicional: fora dos planos e ligada só com a autorização do escritório. Os
+- **Texto novo:** em português, no tom do resto do site, e só o que os sócios decidiram anunciar, pelo contexto do
+  produto, que eles mantêm. A IA das perguntas fora do menu aparece só na página do atendimento, e sempre como adicional: fora dos planos e ligada só com a autorização do escritório. Os
   avisos ao cliente também são um adicional do atendimento, orçado no diagnóstico, e o golpe do falso advogado aparece
   sem a promessa de que os avisos o impedem: eles acostumam o cliente ao canal oficial do escritório.
 - **Página de campanha** (como a `/atendimento`): `campanha` no `Base`, a imagem de preview própria (`imagem`) e o
