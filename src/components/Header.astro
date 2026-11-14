@@ -20,6 +20,7 @@ const rotuloDoLead = contato?.rastrear ?? 'contato';
 const links = [
   { href: '/consultoria', texto: 'Consultoria' },
   { href: '/atendimento', texto: 'Atendimento' },
+  { href: '/avisos', texto: 'Avisos' },
   { href: '/#solucoes', texto: 'Soluções' },
   { href: '/#metodologia', texto: 'Como trabalhamos' },
   { href: '/#equipe', texto: 'Equipe' },
@@ -41,7 +42,8 @@ const links = [
       )
     }
 
-    <nav aria-label="Principal" class="hidden items-center gap-8 lg:flex" data-so-pelo-site={campanha || undefined}>
+    {/* Com os 7 links, o espaço de 32 px só cabe a partir do xl: em 1024 px, ele quebrava os itens em duas linhas */}
+    <nav aria-label="Principal" class="hidden items-center gap-5 whitespace-nowrap lg:flex xl:gap-8" data-so-pelo-site={campanha || undefined}>
       {links.map(({ href, texto }) => <a href={href} class="text-sm text-nevoa transition-colors hover:text-ouro-300">{texto}</a>)}
       <a href={linkDoBotao} class="botao-ouro px-5 py-2.5" data-rastrear={rotuloDoLead}>Fale com a gente</a>
     </nav>

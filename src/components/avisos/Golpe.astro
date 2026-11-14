@@ -1,0 +1,25 @@
+---
+import Titulo from '../Titulo.astro';
+import { golpe } from '../../data/avisos';
+---
+
+<section class="mx-auto max-w-6xl px-4 py-24 sm:px-6" aria-labelledby="golpe-titulo">
+  <Titulo
+    id="golpe-titulo"
+    eyebrow="Como o golpe acontece"
+    titulo="O roteiro do falso advogado"
+    texto="É o mesmo roteiro em todo o país, e ele funciona melhor com o cliente que está há tempo sem notícias do escritório."
+  />
+
+  <ul class="mt-14 grid gap-px overflow-hidden rounded-sm border border-navy-950/10 bg-navy-950/10 sm:grid-cols-2 lg:grid-cols-3">
+    {
+      golpe.map(({ titulo, texto }) => (
+        <li class="bg-white p-8">
+          <span class="block size-2 rotate-45 bg-ouro-600" aria-hidden="true" />
+          <h3 class="mt-5 text-lg font-semibold text-navy-950">{titulo}</h3>
+          <p class="mt-3 leading-relaxed text-tinta-suave">{texto}</p>
+        </li>
+      ))
+    }
+  </ul>
+</section>

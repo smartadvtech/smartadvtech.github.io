@@ -6,6 +6,7 @@ import AntesDepois from '../components/atendimento/AntesDepois.astro';
 import ComoFunciona from '../components/atendimento/ComoFunciona.astro';
 import Demonstracao from '../components/atendimento/Demonstracao.astro';
 import Ia from '../components/atendimento/Ia.astro';
+import Avisos from '../components/atendimento/Avisos.astro';
 import Entregas from '../components/atendimento/Entregas.astro';
 import Metodologia from '../components/Metodologia.astro';
 import Resultados from '../components/Resultados.astro';
@@ -58,6 +59,7 @@ const servico = {
   <ComoFunciona />
   {video && <Demonstracao video={video} />}
   <Ia />
+  <Avisos />
   <Entregas />
   <Metodologia titulo={metodologia.titulo} />
   {prova && <Resultados dados={prova} />}

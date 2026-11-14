@@ -28,11 +28,12 @@ a resposta seguinte com "**O contexto central não carregou pelo import**" e o m
 | `src/data/site.ts` | os textos das seções da home |
 | `src/data/atendimento.ts` | os textos da página do atendimento no WhatsApp (`/atendimento`), a página da campanha |
 | `src/data/consultoria.ts` | os textos da página da consultoria (`/consultoria`), a campanha da organização do escritório |
+| `src/data/avisos.ts` | os textos da página dos avisos ao cliente (`/avisos`), a campanha do golpe do falso advogado. Os três avisos aparecem também na página do atendimento, de onde ela é um adicional |
 | `src/config.ts` | e-mail, WhatsApp, IDs dos parceiros de anúncio, dados da empresa e `indexar` |
-| `src/components/` | uma seção por componente; `Rastreamento` (consentimento e parceiros), `ConsentBanner` e `WhatsAppButton`. As seções só da página do atendimento ficam em `src/components/atendimento/`, e as da consultoria, em `src/components/consultoria/` |
-| `src/pages/` | a página inicial, a do atendimento, a da consultoria, a política de privacidade, a 404 e o `robots.txt` |
+| `src/components/` | uma seção por componente; `Rastreamento` (consentimento e parceiros), `ConsentBanner` e `WhatsAppButton`. As seções só da página do atendimento ficam em `src/components/atendimento/`, as da consultoria, em `src/components/consultoria/`, e as dos avisos, em `src/components/avisos/`. O celular do hero (`atendimento/Celular.astro`) recebe a conversa, nos tipos de `src/lib/conversa.ts` |
+| `src/pages/` | a página inicial, a do atendimento, a da consultoria, a dos avisos, a política de privacidade, a 404 e o `robots.txt` |
 | `src/assets/` | os recortes do logo e as fotos da equipe |
-| `public/videos/` | o vídeo da página do atendimento e o pôster dele; o preview do link da página é o `public/og-atendimento.png` |
+| `public/videos/` | o vídeo da página do atendimento e o pôster dele; o preview do link da página é o `public/og-atendimento.png`, e o da dos avisos, o `public/og-avisos.png` |
 | `scripts/recortar-logo.py` | gera os recortes, o favicon e o `og.jpg` a partir de `design/logo-original.jpeg` |
 
 ## Como trabalhar
@@ -48,9 +49,10 @@ a resposta seguinte com "**O contexto central não carregou pelo import**" e o m
   - listas e cartões de texto ficam à esquerda em qualquer largura.
 - **Conferência:** Lighthouse com acessibilidade, boas práticas e SEO em 100, no site publicado. Na prévia local, o
   canonical aponta para o domínio.
-- **Texto novo:** em português, no tom do resto do site, e só o que a SmartADV entrega hoje. A IA das perguntas fora
-  do menu aparece só na página do atendimento, e sempre como adicional: fora dos planos e ligada só com a autorização
-  do escritório.
+- **Texto novo:** em português, no tom do resto do site, e só o que os sócios decidiram anunciar, pelo contexto do
+  produto, que eles mantêm. A IA das perguntas fora do menu aparece só na página do atendimento, e sempre como adicional: fora dos planos e ligada só com a autorização do escritório. Os
+  avisos ao cliente também são um adicional do atendimento, orçado no diagnóstico, e o golpe do falso advogado aparece
+  sem a promessa de que os avisos o impedem: eles acostumam o cliente ao canal oficial do escritório.
 - **Página de campanha** (como a `/atendimento`): `campanha` no `Base`, a imagem de preview própria (`imagem`) e o
   `contato` da página.
   - **O cabeçalho depende de onde a pessoa veio:** quem chega de fora (o anúncio, o Instagram, a URL digitada) vê só o

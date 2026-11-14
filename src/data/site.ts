@@ -66,6 +66,14 @@ export const tecnologia = {
       link: { href: '/atendimento', texto: 'Conheça o atendimento no WhatsApp →' },
     },
     {
+      nome: 'Avisos ao cliente no WhatsApp',
+      texto:
+        'O escritório avisa o cliente antes de ele perguntar: a resposta nova no processo, os lembretes da audiência e ' +
+        'da perícia e o aviso de que não há novidade. Sempre pelo WhatsApp oficial, o que deixa menos espaço para o ' +
+        'golpe do falso advogado.',
+      link: { href: '/avisos', texto: 'Conheça os avisos ao cliente →' },
+    },
+    {
       nome: 'Automação de fluxos de trabalho',
       texto:
         'Fluxos orquestrados a partir das tarefas do sistema de gestão jurídica, numa plataforma de processos ' +
