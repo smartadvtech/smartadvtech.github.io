@@ -16,12 +16,15 @@ const { campanha = false, contato } = Astro.props;
 const linkDoBotao = linkDeContato(contato);
 const rotuloDoLead = contato?.rastrear ?? 'contato';
 
-// Com a barra na frente, os links funcionam também a partir das outras páginas
+// Os produtos ficam no submenu "Soluções", com o nome completo: soltos no menu, "Atendimento" e "Avisos" pareciam o
+// contato da SmartADV e um mural de comunicados. Com a barra na frente, os links funcionam a partir de qualquer página.
+const solucoes = [
+  { href: '/consultoria', nome: 'Consultoria em gestão jurídica', texto: 'A operação do escritório organizada' },
+  { href: '/atendimento', nome: 'Atendimento no WhatsApp', texto: 'O cliente consulta o processo a qualquer hora' },
+  { href: '/avisos', nome: 'Avisos ao cliente', texto: 'As notícias do processo antes da pergunta' },
+];
+
 const links = [
-  { href: '/consultoria', texto: 'Consultoria' },
-  { href: '/atendimento', texto: 'Atendimento' },
-  { href: '/avisos', texto: 'Avisos' },
-  { href: '/#solucoes', texto: 'Soluções' },
   { href: '/#metodologia', texto: 'Como trabalhamos' },
   { href: '/#equipe', texto: 'Equipe' },
   { href: '/#contato', texto: 'Contato' },
@@ -42,8 +45,30 @@ const links = [
       )
     }
 
-    {/* Com os 7 links, o espaço de 32 px só cabe a partir do xl: em 1024 px, ele quebrava os itens em duas linhas */}
-    <nav aria-label="Principal" class="hidden items-center gap-5 whitespace-nowrap lg:flex xl:gap-8" data-so-pelo-site={campanha || undefined}>
+    <nav aria-label="Principal" class="hidden items-center gap-8 lg:flex" data-so-pelo-site={campanha || undefined}>
+      {/* Abre no clique, e não ao passar o mouse: funciona no toque e no teclado */}
+      <details class="group/solucoes relative">
+        <summary
+          class="flex cursor-pointer list-none items-center gap-1.5 text-sm text-nevoa transition-colors hover:text-ouro-300 group-open/solucoes:text-ouro-300 [&::-webkit-details-marker]:hidden"
+        >
+          Soluções
+          <svg class="size-3.5 transition-transform group-open/solucoes:rotate-180" viewBox="0 0 16 16" aria-hidden="true">
+            <path d="m4 6 4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </summary>
+        <ul class="absolute top-full left-0 mt-5 w-88 rounded-sm border border-white/10 bg-navy-900 p-2 shadow-2xl">
+          {
+            solucoes.map(({ href, nome, texto }) => (
+              <li>
+                <a href={href} class="group/item block rounded-sm px-4 py-3 hover:bg-white/5">
+                  <span class="block text-sm font-semibold text-white group-hover/item:text-ouro-300">{nome}</span>
+                  <span class="mt-0.5 block text-xs text-nevoa-suave">{texto}</span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </details>
       {links.map(({ href, texto }) => <a href={href} class="text-sm text-nevoa transition-colors hover:text-ouro-300">{texto}</a>)}
       <a href={linkDoBotao} class="botao-ouro px-5 py-2.5" data-rastrear={rotuloDoLead}>Fale com a gente</a>
     </nav>
@@ -62,8 +87,22 @@ const links = [
       </summary>
       <nav
         aria-label="Principal"
-        class="absolute right-0 mt-3 flex w-64 flex-col gap-1 rounded-sm border border-white/10 bg-navy-900 p-3 shadow-2xl"
+        class="absolute right-0 mt-3 flex w-72 flex-col gap-1 rounded-sm border border-white/10 bg-navy-900 p-3 shadow-2xl"
       >
+        <p id="menu-solucoes" class="eyebrow px-3 pt-1 pb-1 text-ouro-500">Soluções</p>
+        <ul aria-labelledby="menu-solucoes">
+          {
+            solucoes.map(({ href, nome, texto }) => (
+              <li>
+                <a href={href} class="block rounded-sm px-3 py-2.5 hover:bg-white/5">
+                  <span class="block text-sm text-white">{nome}</span>
+                  <span class="mt-0.5 block text-xs text-nevoa-suave">{texto}</span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+        <span class="mx-3 my-2 border-t border-white/10" aria-hidden="true"></span>
         {links.map(({ href, texto }) => <a href={href} class="rounded-sm px-3 py-2.5 text-sm text-nevoa hover:bg-white/5 hover:text-ouro-300">{texto}</a>)}
         <a href={linkDoBotao} class="botao-ouro mt-2" data-rastrear={rotuloDoLead}>Fale com a gente</a>
       </nav>
@@ -72,8 +111,26 @@ const links = [
 </header>
 
 <script>
-  // O menu do celular fecha ao escolher um destino
-  document.querySelectorAll<HTMLDetailsElement>('header details').forEach((menu) => {
+  // Os dois menus (o submenu "Soluções" do desktop e o do celular) são <details>. Eles fecham ao escolher um destino,
+  // com um clique fora e com o Esc, que devolve o foco a quem os abriu.
+  const menus = document.querySelectorAll<HTMLDetailsElement>('header details');
+
+  menus.forEach((menu) => {
     menu.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => menu.removeAttribute('open')));
+  });
+
+  document.addEventListener('click', (evento) => {
+    menus.forEach((menu) => {
+      if (menu.open && !menu.contains(evento.target as Node)) menu.removeAttribute('open');
+    });
+  });
+
+  document.addEventListener('keydown', (evento) => {
+    if (evento.key !== 'Escape') return;
+    menus.forEach((menu) => {
+      if (!menu.open) return;
+      menu.removeAttribute('open');
+      menu.querySelector('summary')?.focus();
+    });
   });
 </script>
