@@ -21,6 +21,19 @@ const descricao =
   'Tire o atendimento do seu WhatsApp pessoal: triagem, consulta de processo a qualquer hora, IA para as dúvidas e ' +
   'equipe treinada. Pronto em até 30 dias.';
 
+function oferta(nome: string, preco: number) {
+  return {
+    '@type': 'Offer',
+    name: nome,
+    priceSpecification: {
+      '@type': 'UnitPriceSpecification',
+      price: preco.toFixed(2),
+      priceCurrency: 'BRL',
+      unitText: 'mês',
+    },
+  };
+}
+
 const servico = {
   '@context': 'https://schema.org',
   '@type': 'Service',
@@ -31,16 +44,10 @@ const servico = {
   areaServed: { '@type': 'Country', name: 'Brasil' },
   audience: { '@type': 'BusinessAudience', audienceType: 'Escritórios de advocacia' },
   provider: { '@type': 'Organization', name: config.nome, url: config.url },
-  offers: planos.itens.map(({ nome, preco }) => ({
-    '@type': 'Offer',
-    name: nome,
-    priceSpecification: {
-      '@type': 'UnitPriceSpecification',
-      price: preco.toFixed(2),
-      priceCurrency: 'BRL',
-      unitText: 'mês',
-    },
-  })),
+  offers: [
+    ...planos.itens.map(({ nome, preco }) => oferta(nome, preco)),
+    ...planos.ia.itens.map(({ nome, preco }) => oferta(`${planos.ia.titulo} ${nome}`, preco)),
+  ],
 };
 ---
 

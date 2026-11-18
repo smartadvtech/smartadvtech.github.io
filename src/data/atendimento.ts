@@ -251,7 +251,7 @@ export const ia = [
   {
     titulo: 'O escritório decide',
     texto:
-      'É opcional: só é ligada com a autorização do escritório, e o preço é combinado no diagnóstico, fora dos planos.',
+      'É opcional: só é ligada com a autorização do escritório, numa faixa de perguntas por mês, à parte do plano.',
   },
 ];
 
@@ -353,8 +353,8 @@ export const transparencia = [
 export const planos = {
   itens: [
     { nome: 'Starter', preco: 69.9, cota: '200', publico: 'Para escritórios que estão começando' },
-    { nome: 'Plus', preco: 129.9, cota: '500', publico: 'Para escritórios em crescimento' },
-    { nome: 'Basic', preco: 199.9, cota: '1.000', publico: 'Para escritórios com muitos clientes' },
+    { nome: 'Basic', preco: 129.9, cota: '500', publico: 'Para escritórios em crescimento' },
+    { nome: 'Plus', preco: 199.9, cota: '1.000', publico: 'Para escritórios com muitos clientes' },
     { nome: 'Pro', preco: 290, cota: '3.000', publico: 'Para escritórios de alto volume' },
   ],
   inclui: [
@@ -363,9 +363,23 @@ export const planos = {
     'Aviso de uso da cota por e-mail',
     'Sem cobrança por consulta',
   ],
+  // As faixas de IA, à parte do plano de consultas. A pergunta conta mesmo quando a IA passa a conversa para a equipe,
+  // como no contrato, e o texto diz isso para o escritório não estranhar o uso da cota
+  ia: {
+    titulo: 'Adicional de IA',
+    texto:
+      'Somado ao plano, conforme o volume de perguntas fora do menu. Cada mensagem que passa pela IA conta uma ' +
+      'pergunta, inclusive quando ela passa a conversa para a equipe.',
+    itens: [
+      { nome: 'Starter', preco: 39.9, cota: '100' },
+      { nome: 'Basic', preco: 69.9, cota: '300' },
+      { nome: 'Plus', preco: 99.9, cota: '500' },
+      { nome: 'Pro', preco: 149.9, cota: '1.000' },
+    ],
+  },
   adicional:
-    'A IA para as perguntas fora do menu e os avisos ao cliente são adicionais, orçados no diagnóstico e ligados só ' +
-    'com a autorização do escritório.',
+    'A IA e os avisos ao cliente são adicionais, ligados só com a autorização do escritório. Os avisos são orçados no ' +
+    'diagnóstico.',
   consulta:
     'Consulta é cada pedido de andamento, audiência ou perícia que um cliente faz ao assistente. No diagnóstico, ' +
     'estimamos o plano pelo volume de clientes do escritório.',
@@ -445,8 +459,9 @@ export const perguntas = [
     resposta:
       'A mensalidade do atendimento automático vai de R$ 69,90 (até 200 consultas por mês) a R$ 290 (até 3.000), em ' +
       'quatro planos. A implantação é orçada no diagnóstico, conforme o tamanho do escritório. A plataforma de ' +
-      'atendimento e o sistema de gestão são pagos direto aos fornecedores. A IA para as perguntas fora do menu e os ' +
-      'avisos ao cliente são adicionais, orçados à parte.',
+      'atendimento e o sistema de gestão são pagos direto aos fornecedores. A IA para as perguntas fora do menu é um ' +
+      'adicional de R$ 39,90 (até 100 perguntas por mês) a R$ 149,90 (até 1.000), e os avisos ao cliente, um ' +
+      'adicional orçado à parte.',
   },
 ];
 
