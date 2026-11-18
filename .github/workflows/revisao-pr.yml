@@ -94,8 +94,9 @@ jobs:
             4. **Regras do site** (`CLAUDE.md`):
                - o logo só sobre o navy `#021033`, sem redesenhar nem montar versão horizontal;
                - o alinhamento no celular, no tablet e no desktop;
-               - texto em português, no tom do site, e só o que a SmartADV entrega hoje. A IA do chatbot está
-                 desligada, e os preços são sob consulta.
+               - texto em português, no tom do site, e só o que os sócios decidiram anunciar (o "Texto novo" do
+                 `CLAUDE.md`). O contexto do produto, onde fica essa decisão, não está aqui: um preço ou uma função que
+                 aparece pela primeira vez no site precisa da decisão dita na descrição do PR.
             5. **Legibilidade:** componente que repete outro, texto que devia estar em `src/data/site.ts`, indireção
                sem motivo. Esses pontos entram como **deveria mudar** ou **sugestão**, nunca como **bloqueia o merge**.
 
