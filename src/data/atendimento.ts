@@ -251,7 +251,8 @@ export const ia = [
   {
     titulo: 'O escritório decide',
     texto:
-      'É opcional: só é ligada com a autorização do escritório, numa faixa de perguntas por mês, à parte do plano.',
+      'É opcional: só é ligada com a autorização do escritório, numa faixa de perguntas por mês, à parte do plano. Os ' +
+      'preços estão nos planos, abaixo.',
   },
 ];
 
